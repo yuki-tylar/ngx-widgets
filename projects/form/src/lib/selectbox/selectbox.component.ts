@@ -20,7 +20,7 @@ const animation = trigger('slidein', [
 ]);
 
 @Component({
-  selector: 'ng2-selectbox',
+  selector: 'ngx-selectbox',
   templateUrl: './selectbox.component.html',
   styleUrls: ['./selectbox.component.scss'],
   animations: [animation]
@@ -69,7 +69,10 @@ export class SelectboxComponent implements OnInit {
 
   @HostListener('window:click', ['$event']) windowClick(e: Event){
     var target = e.target as HTMLElement;
-    if(!this.host.contains(target)){ this.toggleExpand('hide'); }
+    if(!this.host.contains(target) && this._expanded){ 
+      this.toggleExpand('hide', true);
+      e.preventDefault();
+    }
   }
 
   @HostListener('window: resize') windowResize(){
