@@ -1,12 +1,12 @@
 <div class="form-item-checkbox">
-  <div class="checkbox"
+  <div class="checkbox cursor-pointer"
     [ngStyle]="{background: (_checked? (_color + '30') : 'inherit'), borderColor: (_checked? _color : 'inherit')}" 
   >
-    <div class="check" 
+    <div class="check cursor-pointer" 
       [ngStyle]="{borderColor: _color}" 
       [ngClass]="{checked: _checked}"
     ></div>
     <input type="checkbox" (change)=onChange($event) [id]="_id">
   </div>
-  <label [for]="_id">{{_label}}</label>
+  <label [for]="_id" class="cursor-pointer">{{_label}}</label>
 </div>

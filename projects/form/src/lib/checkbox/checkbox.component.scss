@@ -3,6 +3,8 @@
   line-height: 1.5em;
 }
 
+.cursor-pointer{ cursor: pointer; }
+
 .form-item-checkbox{
   position: relative;
   display: flex;
@@ -10,9 +12,10 @@
 
   label{
     flex: 1 1 auto;
-    margin-left: 0.45em;
+    padding-left: 0.45em;
     line-height: 1.2em;
     user-select: none;
+    font-family: inherit;
   }
 
   .checkbox{
