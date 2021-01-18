@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/form",
       "sourceRoot": "projects/form/src",
-      "prefix": "ng2",
+      "prefix": "ngx",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -164,6 +164,46 @@
             "production": {
               "devServerTarget": "app:serve:production"
             }
+          }
+        }
+      }
+    },
+    "directive": {
+      "projectType": "library",
+      "root": "projects/directive",
+      "sourceRoot": "projects/directive/src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/directive/tsconfig.lib.json",
+            "project": "projects/directive/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/directive/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/directive/src/test.ts",
+            "tsConfig": "projects/directive/tsconfig.spec.json",
+            "karmaConfig": "projects/directive/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/directive/tsconfig.lib.json",
+              "projects/directive/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
