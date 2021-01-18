@@ -1,4 +1,11 @@
-ng2-checkbox{
-  font-size: 25px;
-  line-height: 2em;
+.form-checkbox-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  ngx-checkbox{
+    flex: 1 1 28%;
+    margin: 0 2%;
+    padding: 30px 0;
+  }
 }

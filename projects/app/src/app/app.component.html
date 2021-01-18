@@ -1,12 +1,12 @@
 <div>
-  <ng2-selectbox color="green" [options]="[{id: 1, label: 'test1'}, {id: 2, label: 'test2'}]" (change)="onChangeSelect($event)"></ng2-selectbox>
+  <ngx-selectbox color="green" [options]="[{id: 1, label: 'test1'}, {id: 2, label: 'test2'}]" (change)="onChangeSelect($event)"></ngx-selectbox>
 </div>
 
-<div style="display: flex;">
-  <ng2-checkbox [checked]="true" color='green' [label]="'test1'" (chang)="onChange($event)"></ng2-checkbox>
-  <ng2-checkbox [checked]="true" color='green' [label]="'test2'" (change)="onChange($event)"></ng2-checkbox>
-  <ng2-checkbox [checked]="true" color='green' [label]="'test3'" (change)="onChange($event)"></ng2-checkbox>
-  <ng2-checkbox [checked]="true" color='green' [label]="'test4'" (change)="onChange($event)"></ng2-checkbox>
-  <ng2-checkbox [checked]="false" color='green' [label]="'test5'" (change)="onChange($event)"></ng2-checkbox>
-  <ng2-checkbox [checked]="true" color='green' [label]="'test6'" (change)="onChange($event)"></ng2-checkbox>
+<div class="form-checkbox-group">
+  <ngx-checkbox [checked]="true" color='green' [label]="'test1'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="true" color='green' [label]="'test2'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="true" color='green' [label]="'test3'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="true" color='green' [label]="'test4'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="false" color='green' [label]="'test5'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="true" color='green' [label]="'test6'" (changeState)="onChange($event)"></ngx-checkbox>
 </div>

@@ -1,5 +1,5 @@
 {
-  "name": "@takayuki-h/ng2-form",
+  "name": "@takayuki-h/ngx-form",
   "version": "0.1.0",
   "publishConfig": {
     "access": "public"
