@@ -8,7 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  onChangeState(e: any){
+  onChange(e: any){
     console.log(e);
+  }
+
+  onChangeSelect(e: any){
+    console.log(e.selected)
   }
 }
