@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@ang
 import { FormService, ColorPreset } from '../form.service';
 
 @Component({
-  selector: 'ng2-checkbox',
+  selector: 'ngx-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss']
 })
@@ -14,7 +14,7 @@ export class CheckboxComponent implements OnInit {
   @Input() checked: boolean = false;
   @Input() color: ColorPreset | string = '';
 
-  @Output() change = new EventEmitter<ChangeStateEvent>();
+  @Output() changeState = new EventEmitter<ChangeStateEvent>();
 
   public _id: string;
   public _label: string = 'Please check me!';
@@ -46,12 +46,12 @@ export class CheckboxComponent implements OnInit {
   check(emit: boolean = true){
     this._checked = true;
     if(this.input){ this.input.checked = true; }
-    if(emit){ this.change.emit({id: this._id, checked: true}); }
+    if(emit){ this.changeState.emit({id: this._id, checked: true}); }
   }
   uncheck(emit: boolean = true){
     this._checked = false;
     if(this.input){ this.input.checked = false; }
-    if(emit){ this.change.emit({id: this._id, checked: false}); }
+    if(emit){ this.changeState.emit({id: this._id, checked: false}); }
   }
 
   onChange(e: Event){
