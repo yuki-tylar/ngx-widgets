@@ -1,0 +1,16 @@
+<div class="selectbox-container">
+
+  <button class="selectbox selected rounded" (click)="toggleExpand(null, true)" [ngClass]="{expanded: _expanded}">
+    <span *ngIf="!_selected">Select</span>
+    <span *ngIf="_selected">{{_options[_idxOptionSelected].label}}</span>
+  </button>
+
+  <ul class="selections" [@slidein]="_stateSelection">
+    <li *ngFor="let option of _options; let i = index;">
+      <button class="btn" [focus]="(_idxOptionFocused == i)" (click)="select(i)"
+        [style]="((_idxOptionFocused ==i)? 'background:' + _color + '; color: white;' : null)"
+        (keydown)="focusNextOption($event)">{{option.label}}
+      </button>
+    </li>
+  </ul>
+</div>  
