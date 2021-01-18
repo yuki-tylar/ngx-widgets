@@ -1,4 +1,4 @@
-<div class="selectbox-container">
+<div class="selectbox-container" (clickOutside)="onClickOutside($event)">
 
   <button class="selectbox selected rounded" (click)="toggleExpand(null, true)" [ngClass]="{expanded: _expanded}">
     <span *ngIf="!_selected">Select</span>

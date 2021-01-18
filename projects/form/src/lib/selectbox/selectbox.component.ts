@@ -67,14 +67,6 @@ export class SelectboxComponent implements OnInit {
     this.changeStateSelection();
   }
 
-  @HostListener('window:click', ['$event']) windowClick(e: Event){
-    var target = e.target as HTMLElement;
-    if(!this.host.contains(target) && this._expanded){ 
-      this.toggleExpand('hide', true);
-      e.preventDefault();
-    }
-  }
-
   @HostListener('window: resize') windowResize(){
     var isMobile = (window.innerWidth < 768)? true : false;
     if(this.isMobile != isMobile){ this.isMobile = isMobile; }
@@ -83,6 +75,14 @@ export class SelectboxComponent implements OnInit {
   }
   
   isOptionFocused(i: number){ return (this._idxOptionFocused === i); }
+
+  onClickOutside(e: Event){
+    var target = e.target as HTMLElement;
+    if(!this.host.contains(target) && this._expanded){ 
+      this.toggleExpand('hide', true);
+      e.preventDefault();
+    }
+  }
 
   toggleExpand(state: 'hide' | 'show' | null = null, immediately: boolean = false){
     if(state == 'hide'){      this._expanded = false; }
