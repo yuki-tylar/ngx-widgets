@@ -1,24 +1,30 @@
 :host{
   font-size: 1em;
+  line-height: 1.5em;
 }
 
 .form-item-checkbox{
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   label{
+    flex: 1 1 auto;
     margin-left: 0.45em;
-    line-height: 1.5em;
+    line-height: 1.2em;
     user-select: none;
   }
 
   .checkbox{
+    flex: 0 0 auto;
     position: relative;
-    width: 1.05em;
-    height: 1.05em;
+    width: 1.04em;
+    height: 1.04em;
+    margin-top: 0.08em;
     border-radius: 0.2em;
     border: solid 1px;
+    transition-property: border-color, background-color;
+    transition-duration: 0.2s;
 
     .check{
       position: absolute;

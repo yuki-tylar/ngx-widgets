@@ -1,6 +1,11 @@
 <div class="form-item-checkbox">
-  <div class="checkbox">
-    <div class="check" [ngStyle]="{borderColor: _color}" [ngClass]="{checked: _checked}"></div>
+  <div class="checkbox"
+    [ngStyle]="{background: (_checked? (_color + '30') : 'inherit'), borderColor: (_checked? _color : 'inherit')}" 
+  >
+    <div class="check" 
+      [ngStyle]="{borderColor: _color}" 
+      [ngClass]="{checked: _checked}"
+    ></div>
     <input type="checkbox" (change)=onChange($event) [id]="_id">
   </div>
   <label [for]="_id">{{_label}}</label>

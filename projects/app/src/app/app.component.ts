@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  onChangeState(e: boolean){
+  onChangeState(e: any){
     console.log(e);
   }
 }
