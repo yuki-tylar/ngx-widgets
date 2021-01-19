@@ -1,12 +1,19 @@
 <div>
-  <ngx-selectbox color="green" [options]="[{id: 1, label: 'test1'}, {id: 2, label: 'test2'}]" (change)="onChangeSelect($event)"></ngx-selectbox>
+  <button (click)="select(null)">Deselect</button>
+  <button *ngFor="let o of optionsSelect; let i = index;" (click)="select(i)">Select {{o.label}}</button>
+</div>
+<div>
+  <ngx-selectbox [color]="color" [options]="optionsSelect" [selected]="selected" (change)="onChangeSelect($event)"></ngx-selectbox>
+</div>
+
+<div>
+  <button *ngFor="let c of colorset;" (click)="setColor(c)">{{c | titlecase}}</button>
+</div>
+
+<div>
+  <button *ngFor="let s of statesetCheckbox" (click)="setStateCheckbox(s)">{{s | titlecase}}</button>
 </div>
 
 <div class="form-checkbox-group">
-  <ngx-checkbox [checked]="true" color='green' [label]="'test1'" (changeState)="onChange($event)"></ngx-checkbox>
-  <ngx-checkbox [checked]="true" color='green' [label]="'test2'" (changeState)="onChange($event)"></ngx-checkbox>
-  <ngx-checkbox [checked]="true" color='green' [label]="'test3'" (changeState)="onChange($event)"></ngx-checkbox>
-  <ngx-checkbox [checked]="true" color='green' [label]="'test4'" (changeState)="onChange($event)"></ngx-checkbox>
-  <ngx-checkbox [checked]="false" color='green' [label]="'test5'" (changeState)="onChange($event)"></ngx-checkbox>
-  <ngx-checkbox [checked]="true" color='green' [label]="'test6'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox [checked]="checked" [color]='color' [label]="'test1'" (changeState)="onChange($event)"></ngx-checkbox>
 </div>

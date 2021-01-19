@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeSelectEvent , ChangeCheckboxEvent} from 'form';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,32 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  onChange(e: any){
-    console.log(e);
+  public colorset = ['blue', 'green', 'orange', 'red', 'black', '#cccccc'];
+  public color: string = 'green';
+
+  public statesetCheckbox = ['check', 'uncheck'];
+  public checked = false;
+
+  public optionsSelect = [{id: 1, label: 'test1'},{id: 2, label: 'test2'}, {id: 1, label: 'test3'},  ]
+  public selected: number | null = null;
+
+  setColor(s: string){
+    this.color = s;
   }
 
-  onChangeSelect(e: any){
-    console.log(e.selected)
+  setStateCheckbox(s: string){
+    this.checked = (s == 'check')? true : false;
+  }
+
+  select(i: number){
+    this.selected = i;
+  }
+
+  onChange(e: ChangeCheckboxEvent){
+    this.checked = e.checked;
+  }
+
+  onChangeSelect(e: ChangeSelectEvent){
+    this.selected = e.index;
   }
 }
