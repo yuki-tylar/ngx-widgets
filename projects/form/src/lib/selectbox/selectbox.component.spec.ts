@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SelectboxComponent } from './selectbox.component';
 
@@ -8,7 +9,8 @@ describe('SelectboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectboxComponent ]
+      declarations: [ SelectboxComponent ],
+      imports: [ NoopAnimationsModule ]
     })
     .compileComponents();
   });

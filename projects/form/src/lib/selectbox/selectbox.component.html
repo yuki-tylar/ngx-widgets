@@ -7,8 +7,8 @@
 
   <ul class="selections" [@slidein]="_stateSelection">
     <li *ngFor="let option of _options; let i = index;">
-      <button class="btn" [focus]="(_idxOptionFocused == i)" (click)="select(i)"
-        [style]="((_idxOptionFocused ==i)? 'background:' + _color + '; color: white;' : null)"
+      <button [focus]="(_idxOptionFocused == i)" (click)="select(i)"
+        [style]="((_idxOptionFocused ==i)? ('background: ' + _color + '; color: white;') : null)"
         (keydown)="focusNextOption($event)">{{option.label}}
       </button>
     </li>

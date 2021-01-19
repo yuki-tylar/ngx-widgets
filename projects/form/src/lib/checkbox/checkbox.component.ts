@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, SimpleChanges } from '@angular/core';
 import { FormService, ColorPreset } from '../form.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class CheckboxComponent implements OnInit {
   @Input() checked: boolean = false;
   @Input() color: ColorPreset | string = '';
 
-  @Output() changeState = new EventEmitter<ChangeStateEvent>();
+  @Output() changeState = new EventEmitter<ChangeCheckboxEvent>();
 
   public _id: string;
   public _label: string = 'Please check me!';
@@ -30,6 +30,17 @@ export class CheckboxComponent implements OnInit {
   ) {
     this._id = _f.createId();
     this.host = _el.nativeElement;
+  }
+
+  ngOnChanges(e: SimpleChanges){
+    if(e.checked && e.checked.currentValue !== e.checked.previousValue){
+      if(this.checked === true){ this.check(false);   }
+      else{                      this.uncheck(false); }
+    }
+
+    if(e.color && e.color.currentValue != e.color.previousValue){
+      this._color = this._f.setColor(this.color);
+    }
   }
 
   ngOnInit(): void {
@@ -62,7 +73,7 @@ export class CheckboxComponent implements OnInit {
   }
 }
 
-type ChangeStateEvent = {
+export type ChangeCheckboxEvent = {
   checked: boolean;
   id: string;
 }

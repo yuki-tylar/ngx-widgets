@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, HostListener, ElementRef, SimpleChanges } from '@angular/core';
 import { FormService } from '../form.service';
 import { state, trigger, animate, transition, style } from '@angular/animations';
 
@@ -32,7 +32,7 @@ export class SelectboxComponent implements OnInit {
   @Input() selected: number | null = null;
   @Input() color: ColorPreset | string = '';
 
-  @Output() change = new EventEmitter<ChangeStateEvent>();
+  @Output() change = new EventEmitter<ChangeSelectEvent>();
 
   public _id: string;
   public _options: Option[] = []
@@ -53,6 +53,22 @@ export class SelectboxComponent implements OnInit {
     this._id = _f.createId(); 
     this.host = _el.nativeElement;
     this.isMobile = (window.innerWidth < 768)? true : false;
+  }
+
+  ngOnChanges(e: SimpleChanges){
+    if(e.color && e.color.currentValue != e.color.previousValue){
+      this._color = this._f.setColor(this.color);
+    }
+
+    if(e.selected && e.selected.currentValue !== e.selected.previousValue){
+      if(this.selected === null){ 
+        this._selected = false;
+        this._idxOptionSelected = 0;
+      }else{
+        this._selected = true;
+        this._idxOptionSelected = this.selected;
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -136,15 +152,15 @@ export class SelectboxComponent implements OnInit {
     this._idxOptionSelected = idx;
     this._idxOptionFocused = idx;
     this.toggleExpand('hide', isCloseImmediately);
-
-    if(emit){ this.change.emit({id: this._id, selected: this._options[idx]}); }
+    if(emit){ this.change.emit({id: this._id, selected: this._options[idx], index: idx}); }
   }
 }
 
 type ColorPreset = 'blue' | 'green' | 'orange' | 'black'
 type Option = {id: string | number, label: string};
 
-type ChangeStateEvent = {
+export type ChangeSelectEvent = {
   selected: Option;
   id: string;
+  index: number;
 }
