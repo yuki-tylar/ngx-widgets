@@ -2,7 +2,7 @@
 
 :host{
   color: inherit;
-  button { background: white; }
+  button, .selections { background: white; }
   button.selectbox{ border-color: #A6A6A6; }
   button.selectbox::after{ border-color: #A6A6A6; }
   ul.selections{ border-color: #A6A6A6; }
@@ -16,7 +16,7 @@
   }
 
   .darkmode{
-    button{ background: #272727; }
+    button, .selections{ background: #272727; }
     button.selectbox{ border-color: black; }
     button.selectbox::after{ border-color: white; }
     ul.selections{ border-color: black; }
@@ -24,7 +24,7 @@
 
   .darkmode-auto{
     @media (prefers-color-scheme: dark){
-      button { background: #272727; }
+      button, .selections { background: #272727; }
       button.selectbox{ border-color: black; }
       button.selectbox::after{ border-color: white; }
       ul.selections{ border-color: black; }
@@ -47,6 +47,7 @@
 
 button{
   appearance: none;
+  -webkit-tap-highlight-color: transparent;
   border: none;
   padding: 0;
   margin: 0;
@@ -123,6 +124,8 @@ ul.selections{
   li{ 
     position: relative;
     z-index: 1; 
+    margin: 0;
+    padding: 0;
 
     button{
       padding: 0.9em 0.5em;
