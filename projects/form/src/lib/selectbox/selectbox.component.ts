@@ -79,6 +79,13 @@ export class SelectboxComponent implements OnInit {
     }
   }
 
+  getRootClass(){
+    var result = this.color;
+    if(this.darkmode == 'auto'){ result += ' darkmode-auto'; }
+    else if(this.darkmode == 'enable'){ result += ' darkmode'}
+    return result;
+  }
+
   toggleExpand(state: 'hide' | 'show' | null = null, immediately: boolean = false){
     this._expanded = (state == 'hide')? false : (state == 'show')? true : !this._expanded;
     if(this._expanded){ this._controller.touch(); }

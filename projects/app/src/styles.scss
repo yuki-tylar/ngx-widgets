@@ -1,7 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
+:root{
+
+  // --ngx-form-accent: #3375C3;
+  // --ngx-form-accent-font: white;
+  // --ngx-form-primary: white;
+  // --ngx-form-primary-font: black;
+  // --ngx-form-secondary: grey;
+
+  // --ngx-form-accent-dark: blue;
+  // --ngx-form-accent-font-dark: white;
+  // --ngx-form-primary-dark: black;
+  // --ngx-form-primary-font-dark: white;  
+  // --ngx-form-secondary-dark: grey;
+}
+
 body{
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 16px;
+
+  color: black;
+  background: white;
+  @media (prefers-color-scheme: dark){
+    // color: white;
+    // background: black;
+  }
+
 }

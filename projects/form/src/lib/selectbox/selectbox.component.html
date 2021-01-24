@@ -1,6 +1,6 @@
 <div 
 class="selectbox-container"
-[ngClass]="{'darkmode-auto': (darkmode == 'auto'), darkmode: (darkmode == 'enable')}"
+[ngClass]="getRootClass()"
 (clickOutside)="onClickOutside($event)" 
 >
 
