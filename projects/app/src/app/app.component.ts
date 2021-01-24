@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChangeSelectEvent , ChangeCheckboxEvent} from 'form';
 
 @Component({
@@ -6,7 +6,7 @@ import { ChangeSelectEvent , ChangeCheckboxEvent} from 'form';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
 
   public colorset = ['blue', 'green', 'orange', 'red', 'black', '#cccccc'];
@@ -17,6 +17,9 @@ export class AppComponent {
 
   public optionsSelect = [{id: 1, label: 'test1'},{id: 2, label: 'test2'}, {id: 1, label: 'test3'},  ]
   public selected: number | null = null;
+
+  ngOnInit(){
+  }
 
   setColor(s: string){
     this.color = s;
@@ -36,5 +39,10 @@ export class AppComponent {
 
   onChangeSelect(e: ChangeSelectEvent){
     this.selected = e.index;
+  }
+
+  private selectController: any;
+  subscribeValidate(e: any){
+    this.selectController = e;
   }
 }

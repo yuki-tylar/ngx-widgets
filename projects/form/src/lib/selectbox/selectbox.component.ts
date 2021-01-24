@@ -1,56 +1,42 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, HostListener, ElementRef, SimpleChanges } from '@angular/core';
 import { FormService } from '../form.service';
-import { state, trigger, animate, transition, style } from '@angular/animations';
-
-
-const animation = trigger('slidein', [
-  state('slideoutHorizontal', style({display: 'none'})),
-  state('slideoutVertical', style({display: 'none'})),
-  state('slidein', style({display: 'block'})),
-  transition('slideoutHorizontal=>slidein', [
-    style({display: 'block', opacity: 0, transform: 'translateX(-5em)'}),
-    animate('200ms ease', style({opacity: 1, transform: 'translate(0)'})),
-  ]),
-  transition('slideoutVertical=>slidein', [
-    style({display: 'block', opacity: 0, transform: 'translateY(-2em)'}),
-    animate('200ms ease', style({opacity: 1, transform: 'translate(0)'})),
-  ]),
-  transition('slidein=>slideoutHorizontal', animate('200ms ease', style({ opacity: 0, transform: 'translateX(-5em)'}))),
-  transition('slidein=>slideoutVertical', animate('200ms ease', style({ opacity: 0, transform: 'translateY(-2em)'}))),
-]);
+import { SelectController } from '../select-controller';
+import { Option, ColorPreset } from '../types';
+import { slideinAnimation } from "../animations";
 
 @Component({
   selector: 'ngx-selectbox',
   templateUrl: './selectbox.component.html',
   styleUrls: ['./selectbox.component.scss'],
-  animations: [animation]
+  animations: [slideinAnimation]
 })
 export class SelectboxComponent implements OnInit {
 
-  @Input() id: string | number | null = null;
+  @Input() id?: string | number;
   @Input() options: Option[] = [];
-  @Input() selected: number | null = null;
+  @Input() selected?: number | Option;
   @Input() color: ColorPreset | string = '';
 
-  @Output() change = new EventEmitter<ChangeSelectEvent>();
+  @Input() required: string | boolean = '';
 
-  public _id: string;
-  public _options: Option[] = []
-  public _selected: boolean = false;
-  public _idxOptionSelected: number = 0;
-  public _idxOptionFocused: number = 0;
+  @Output() change = new EventEmitter<ChangeSelectEvent>();
+  @Output() getController = new EventEmitter<SelectController>();
+
   public _color: string = '';
+
+  public _idxOptionFocused: number = 0;
   public _expanded: boolean = false;
   public _stateSelection: string = 'slideoutVertical';
+  public _controller: SelectController = new SelectController();
 
   private host: HTMLElement;
   private isMobile: boolean;
+
   constructor(
     private _f: FormService,
     private _changeDetector: ChangeDetectorRef,
     _el: ElementRef,
   ) {
-    this._id = _f.createId(); 
     this.host = _el.nativeElement;
     this.isMobile = (window.innerWidth < 768)? true : false;
   }
@@ -59,28 +45,23 @@ export class SelectboxComponent implements OnInit {
     if(e.color && e.color.currentValue != e.color.previousValue){
       this._color = this._f.setColor(this.color);
     }
-
-    if(e.selected && e.selected.currentValue !== e.selected.previousValue){
-      if(this.selected === null){ 
-        this._selected = false;
-        this._idxOptionSelected = 0;
-      }else{
-        this._selected = true;
-        this._idxOptionSelected = this.selected;
-      }
+    if(e.selected && e.selected.currentValue != e.selected.previousValue){
+      if(typeof this.selected == 'number' || this.selected){ this._controller.select(this.selected); }
+      else{ this._controller.deselect(); }
     }
   }
 
   ngOnInit(): void {
-    if(this.id){ this._id = this.id.toString(); }
-    if(this.options){ this._options = this.options; }
+    this.changeStateSelection();
     this._color = this._f.setColor(this.color);
 
-    if(this.selected !== null){
-      this._selected = true;
-      this._idxOptionSelected = this.selected;
-    }
-    this.changeStateSelection();
+    this._controller.setId( this.id? this.id : this._f.createId() );
+    this._controller.setOptions(this.options);
+
+    if(this.selected){ this._controller.select(this.selected);}
+    if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
+  
+    this.emitController();
   }
 
   @HostListener('window: resize') windowResize(){
@@ -96,21 +77,21 @@ export class SelectboxComponent implements OnInit {
     var target = e.target as HTMLElement;
     if(!this.host.contains(target) && this._expanded){ 
       this.toggleExpand('hide', true);
-      e.preventDefault();
+      this._controller.touch();
     }
   }
 
   toggleExpand(state: 'hide' | 'show' | null = null, immediately: boolean = false){
-    if(state == 'hide'){      this._expanded = false; }
-    else if(state == 'show'){ this._expanded = true; }
-    else{                     this._expanded = !this._expanded; }
+    this._expanded = (state == 'hide')? false : (state == 'show')? true : !this._expanded;
+    if(this._expanded){ this._controller.touch(); }
+    else{ this._controller.dirty(); }
 
     this.changeStateSelection(immediately);
 
     if(this._expanded){
       this._idxOptionFocused = -1;
       setTimeout(()=>{
-        this._idxOptionFocused = this._idxOptionSelected;
+        this._idxOptionFocused = (this._controller.index < 0)? 0 : this._controller.index;
         this._changeDetector.markForCheck();
       });  
     }
@@ -148,19 +129,19 @@ export class SelectboxComponent implements OnInit {
 
   select(idx: number, emit: boolean = true){
     var isCloseImmediately = (this._idxOptionFocused == idx)? true : false;
-    this._selected = true;
-    this._idxOptionSelected = idx;
+    this._controller.select(idx);
     this._idxOptionFocused = idx;
+
     this.toggleExpand('hide', isCloseImmediately);
-    if(emit){ this.change.emit({id: this._id, selected: this._options[idx], index: idx}); }
+    if(emit){ this.change.emit({id: this._controller.id, index: this._controller.index}) }
   }
+
+  emitController(){ this.getController.emit(this._controller); }
 }
 
-type ColorPreset = 'blue' | 'green' | 'orange' | 'black'
-type Option = {id: string | number, label: string};
 
 export type ChangeSelectEvent = {
-  selected: Option;
   id: string;
   index: number;
 }
+

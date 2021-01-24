@@ -1,9 +1,17 @@
 <div>
-  <button (click)="select(null)">Deselect</button>
-  <button *ngFor="let o of optionsSelect; let i = index;" (click)="select(i)">Select {{o.label}}</button>
+  <button (click)="selectController.deselect(null)">Deselect</button>
+  <button *ngFor="let o of optionsSelect; let i = index;" (click)="selectController.select(i)">Select {{o.label}}</button>
+  <button (click)="selectController.clean()">Clean</button>
 </div>
 <div>
-  <ngx-selectbox [color]="color" [options]="optionsSelect" [selected]="selected" (change)="onChangeSelect($event)"></ngx-selectbox>
+  <ngx-selectbox 
+  [color]="color" 
+  [required]="'必ずセレクトしてください'"
+  [options]="optionsSelect" 
+  [selected]="selected" 
+  (change)="onChangeSelect($event)"
+  (getController)="subscribeValidate($event)"
+  ></ngx-selectbox>
 </div>
 
 <div>
@@ -16,4 +24,8 @@
 
 <div class="form-checkbox-group">
   <ngx-checkbox [checked]="checked" [color]='color' [label]="'test1'" (changeState)="onChange($event)"></ngx-checkbox>
+</div>
+
+<div class="form-textfield-group">
+  <ngx-textfield></ngx-textfield>
 </div>
