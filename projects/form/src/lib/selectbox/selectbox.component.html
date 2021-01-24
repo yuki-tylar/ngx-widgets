@@ -1,4 +1,8 @@
-<div class="selectbox-container" (clickOutside)="onClickOutside($event)" >
+<div 
+class="selectbox-container"
+[ngClass]="{'darkmode-auto': (darkmode == 'auto'), darkmode: (darkmode == 'enable')}"
+(clickOutside)="onClickOutside($event)" 
+>
 
   <button class="selectbox selected rounded" (click)="toggleExpand(null, true)" [ngClass]="{expanded: _expanded}">
     <span *ngIf="!_controller.isSelected">Select</span>
@@ -8,7 +12,7 @@
   <ul class="selections" [@slidein]="_stateSelection">
     <li *ngFor="let option of _controller.options; let i = index;">
       <button [focus]="(_idxOptionFocused == i)" (click)="select(i)"
-        [style]="((_idxOptionFocused ==i)? ('background: ' + _color + '; color: white;') : null)"
+        [ngClass]="[(isOptionFocused(i)? 'active' : ''), color]"
         (keydown)="focusNextOption($event)">{{option.label}}
       </button>
     </li>

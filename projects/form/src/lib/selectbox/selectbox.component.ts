@@ -15,7 +15,8 @@ export class SelectboxComponent implements OnInit {
   @Input() id?: string | number;
   @Input() options: Option[] = [];
   @Input() selected?: number | Option;
-  @Input() color: ColorPreset | string = '';
+  @Input() color: ColorPreset = 'default';
+  @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
   @Input() required: string | boolean = '';
 
@@ -42,9 +43,7 @@ export class SelectboxComponent implements OnInit {
   }
 
   ngOnChanges(e: SimpleChanges){
-    if(e.color && e.color.currentValue != e.color.previousValue){
-      this._color = this._f.setColor(this.color);
-    }
+    // if(e.color && e.color.currentValue != e.color.previousValue){}
     if(e.selected && e.selected.currentValue != e.selected.previousValue){
       if(typeof this.selected == 'number' || this.selected){ this._controller.select(this.selected); }
       else{ this._controller.deselect(); }
@@ -53,7 +52,6 @@ export class SelectboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeStateSelection();
-    this._color = this._f.setColor(this.color);
 
     this._controller.setId( this.id? this.id : this._f.createId() );
     this._controller.setOptions(this.options);
