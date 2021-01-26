@@ -65,7 +65,7 @@ export class SelectboxComponent implements OnInit {
   }
 
   @HostListener('window: resize') windowResize(){
-    var isMobile = (window.innerWidth < 768)? true : false;
+    const isMobile = (window.innerWidth < 768)? true : false;
     if(this.isMobile != isMobile){ this.isMobile = isMobile; }
 
     this.changeStateSelection();
@@ -74,7 +74,7 @@ export class SelectboxComponent implements OnInit {
   isOptionFocused(i: number){ return (this._idxOptionFocused === i); }
 
   onClickOutside(e: Event){
-    var target = e.target as HTMLElement;
+    const target = e.target as HTMLElement;
     if(!this.host.contains(target) && this._expanded){ 
       this.toggleExpand('hide', true);
       this._controller.touch();
@@ -98,12 +98,12 @@ export class SelectboxComponent implements OnInit {
   }
 
   changeStateSelection(closeImmediately: boolean = false){
-    var s = '';
+    let s = '';
     if(this._expanded){ s = 'slidein';}
     else if(this.isMobile){ s = 'slideoutVertical';  }
     else{                   s = 'slideoutHorizontal'; }
   
-    var time = (closeImmediately)? 0 : 250;
+    const time = (closeImmediately)? 0 : 250;
     setTimeout(()=>{
       this._stateSelection = s;
       this._changeDetector.markForCheck();
@@ -128,7 +128,7 @@ export class SelectboxComponent implements OnInit {
   }
 
   select(idx: number, emit: boolean = true){
-    var isCloseImmediately = (this._idxOptionFocused == idx)? true : false;
+    const isCloseImmediately = (this._idxOptionFocused == idx)? true : false;
     this._controller.select(idx);
     this._idxOptionFocused = idx;
 

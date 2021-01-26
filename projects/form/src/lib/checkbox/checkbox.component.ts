@@ -37,7 +37,7 @@ export class CheckboxComponent implements OnInit {
   }
 
   getCheckboxClass(){ 
-    var result = [];
+    const result = [];
     if(this._controller.value){ 
       result.push('active'); 
       if(this.color == 'default'){ result.push('border-accent'); }
@@ -69,8 +69,7 @@ export class CheckboxComponent implements OnInit {
 
 
   onChange(e: Event){
-    var target = e.target as HTMLInputElement;
-    var isChecked = target.checked;
+    const isChecked = (e.target as HTMLInputElement).checked;
     if(isChecked){ this._controller.check(); }
     else{ this._controller.uncheck(); }
 

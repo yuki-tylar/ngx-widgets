@@ -1,54 +1,6 @@
 @import "../assets/color";
 @import "../assets/general";
 
-// :host{
-//   color: var(--ngx-form-primary-font, inherit);
-//   button, .selections { background: var(--ngx-form-primary, white); }  
-//   button.selectbox,
-//   button.selectbox::after,
-//   ul.selections { border-color: var(--ngx-form-secondary, #A6A6A6); }
-
-//   ul.selections li button.active{
-//     background: var(--ngx-form-accent, $yellow); color: var(--ngx-form-accent-font, black);
-
-//     &.blue{       background: var(--blue,   $blue);         color: white; }
-//     &.green{      background: var(--green,  $green);        color: white; }
-//     &.orange{     background: var(--orange, $orange);       color: white; }
-//     &.grey-dark{  background: var(--grey-dark, $grey-dark);  color: white; }
-//     &.yellow{     background: var(--yellow, $yellow);       color: black; }
-//   }
-
-//   .darkmode{
-//     color: var(--ngx-form-primary-font-dark, white);
-//     button, .selections { background: var(--ngx-form-primary-dark, #272727); }  
-
-//     button.selectbox,
-//     ul.selections { border-color: var(--ngx-form-secondary-dark, black); }
-
-//     button.selectbox::after{ border-color: var(--ngx-form-primary-font-dark, white); }
-  
-//     ul.selections li button.active{
-//       background: var(--ngx-form-accent-dark, var(--ngx-form-accent, $yellow)); color: var(--ngx-form-accent-font-dark, var(--ngx-form-accent-font, black));
-//     }  
-//   }
-
-//   .darkmode-auto{
-//     @media (prefers-color-scheme: dark){
-//       color: var(--ngx-form-primary-font-dark, white);
-//       button, .selections { background: var(--ngx-form-primary-dark, #272727); }  
-  
-//       button.selectbox,
-//       ul.selections { border-color: var(--ngx-form-secondary-dark, black); }
-  
-//       button.selectbox::after{ border-color: var(--ngx-form-primary-font-dark, white); }
-    
-//       ul.selections li button.active{
-//         background: var(--ngx-form-accent-dark, var(--ngx-form-accent, $yellow)); color: var(--ngx-form-accent-font-dark, var(--ngx-form-accent-font, black));
-//       }    
-//     }
-//   }
-// }
-
 :host{
   line-height: 1em;
   z-index: 100;

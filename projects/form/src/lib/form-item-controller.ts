@@ -24,19 +24,19 @@ export class FormItemController implements IFormItemController{
   get isValidationOn(){return (this._validators.size > 0); }
 
   get isValid(){
-    var isValid = true;
+    let isValid = true;
     this._validators.forEach(v=>{ if(!v.isValid){ isValid = false; } });
     return isValid;
   }
   get isInvalid(){ return this.isValid; }
   get errors(){
-    var errors: FormValidationName[] = [];
+    const errors: FormValidationName[] = [];
     this._validators.forEach((v,k)=>{ if(v.isValid){ errors.push(k); } })
     return errors;
   }
   get errorMessage(){
-    var message: string = '';
-    var required = this._validators.get('required');
+    let message: string = '';
+    const required = this._validators.get('required');
     if(required && !required.isValid){ message = required.message; }
     return message;
   }
@@ -45,9 +45,9 @@ export class FormItemController implements IFormItemController{
 
   setId(id?: string | number){
     if(!id){  
-      var strSet = 'abcdefghijklmnopqrstuvwxyz1234567890'; 
+      const strSet = 'abcdefghijklmnopqrstuvwxyz1234567890'; 
       id = '';
-      for(var i=0; i<8; i++){ id += strSet[Math.floor( Math.random() * strSet.length )]; }
+      for(let i=0; i<8; i++){ id += strSet[Math.floor( Math.random() * strSet.length )]; }
     }
     this._id = (typeof id == 'number')? id.toString() : id; 
   }

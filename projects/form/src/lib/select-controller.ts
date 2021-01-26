@@ -26,11 +26,11 @@ export class SelectController extends FormItemController implements ISelectContr
   setOptions(options: Option[]){ this._options = options; }
 
   setValidator(name: FormValidationName, val: string | boolean, defaultMessage: string){
-    var message: string;
+    let message: string;
     if(typeof val == 'string'){ message = (val == 'true' || val == '')? defaultMessage : val;}
     else{ message = defaultMessage; }
-    var isValid: boolean = false;
-    
+   
+    let isValid: boolean = false; 
     if(name == 'required' && this._index >= 0){ isValid = true; }
 
     this._validators.set(name, {isValid: isValid, message: message})
@@ -38,10 +38,10 @@ export class SelectController extends FormItemController implements ISelectContr
 
 
   select(o: number | Option): boolean{
-    var index: number = -1;
+    let index: number = -1;
     if(typeof o == 'number'){ index = o; }
     else{
-      for(var i=0; i<this._options.length; i++){
+      for(let i=0; i<this._options.length; i++){
         if(this._options[i].id == o.id){
           index = i;
           break;
@@ -54,7 +54,7 @@ export class SelectController extends FormItemController implements ISelectContr
     this.dirty();
     this.touch();  
 
-    var required = this._validators.get('required');
+    const required = this._validators.get('required');
     if(required){ required.isValid = true; }
 
     return true;
@@ -65,7 +65,7 @@ export class SelectController extends FormItemController implements ISelectContr
     this.dirty();
     this.touch();
 
-    var required = this._validators.get('required');
+    const required = this._validators.get('required');
     if(required){ required.isValid = false; }
     
     return true;

@@ -13,11 +13,11 @@ export class CheckboxController extends FormItemController implements ICheckboxC
   constructor(){ super(); }
 
   setValidator(name: FormValidationName, val: string | boolean, defaultMessage: string){
-    var message: string;
+    let message: string;
     if(typeof val == 'string'){ message = (val == 'true' || val == '')? defaultMessage : val;}
     else{ message = defaultMessage; }
 
-    var isValid: boolean = (name == 'required' && this._isChecked)? true : false;
+    const isValid: boolean = (name == 'required' && this._isChecked)? true : false;
 
     this._validators.set(name, {isValid: isValid, message: message})
   }
@@ -30,7 +30,7 @@ export class CheckboxController extends FormItemController implements ICheckboxC
     if(isChecked === null){ isChecked = !isChecked; }
     this._isChecked = isChecked;
 
-    var required = this._validators.get('required');
+    const required = this._validators.get('required');
     if(required){ required.isValid = isChecked; }
     
     if(makeDirty){
