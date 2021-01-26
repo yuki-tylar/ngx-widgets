@@ -23,8 +23,6 @@ export class SelectboxComponent implements OnInit {
   @Output() change = new EventEmitter<ChangeSelectEvent>();
   @Output() getController = new EventEmitter<SelectController>();
 
-  public _color: string = '';
-
   public _idxOptionFocused: number = 0;
   public _expanded: boolean = false;
   public _stateSelection: string = 'slideoutVertical';
@@ -32,6 +30,10 @@ export class SelectboxComponent implements OnInit {
 
   private host: HTMLElement;
   private isMobile: boolean;
+
+  get darkClass(){ return (this.darkmode == 'enable')? 'dark' : (this.darkmode=="auto")? 'dark-auto' : ''; }
+  get withValidatorClass(){ return this._controller.isValidationOn? 'with-validator' : ""; }
+  get colorClass(){ return this.color == 'default'? '' : this.color; }
 
   constructor(
     private _f: FormService,
@@ -53,7 +55,7 @@ export class SelectboxComponent implements OnInit {
   ngOnInit(): void {
     this.changeStateSelection();
 
-    this._controller.setId( this.id? this.id : this._f.createId() );
+    this._controller.setId(this.id);
     this._controller.setOptions(this.options);
 
     if(this.selected){ this._controller.select(this.selected);}
@@ -77,13 +79,6 @@ export class SelectboxComponent implements OnInit {
       this.toggleExpand('hide', true);
       this._controller.touch();
     }
-  }
-
-  getRootClass(){
-    var result = this.color;
-    if(this.darkmode == 'auto'){ result += ' darkmode-auto'; }
-    else if(this.darkmode == 'enable'){ result += ' darkmode'}
-    return result;
   }
 
   toggleExpand(state: 'hide' | 'show' | null = null, immediately: boolean = false){

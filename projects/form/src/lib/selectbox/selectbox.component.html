@@ -1,19 +1,29 @@
 <div 
 class="selectbox-container"
-[ngClass]="getRootClass()"
+[ngClass]="[darkClass, withValidatorClass]"
 (clickOutside)="onClickOutside($event)" 
 >
 
-  <button class="selectbox selected rounded" (click)="toggleExpand(null, true)" [ngClass]="{expanded: _expanded}">
+  <button class="selectbox rounded color-bg color-border-secondary"
+  (click)="toggleExpand(null, true)" 
+  >
     <span *ngIf="!_controller.isSelected">Select</span>
     <span *ngIf="_controller.isSelected">{{_controller.value}}</span>
+    
+    <div class="indicator color-border-indicator"
+    [ngClass]="{expanded: _expanded}"
+    ></div>
   </button>
 
-  <ul class="selections" [@slidein]="_stateSelection">
+  <ul class="selections color-border-secondary bg-primary"
+  [@slidein]="_stateSelection"
+  >
     <li *ngFor="let option of _controller.options; let i = index;">
-      <button [focus]="(_idxOptionFocused == i)" (click)="select(i)"
-        [ngClass]="[(isOptionFocused(i)? 'active' : ''), color]"
-        (keydown)="focusNextOption($event)">{{option.label}}
+      <button [focus]="(_idxOptionFocused == i)"
+      class="color-bg color-text"
+      (click)="select(i)"
+      [ngClass]="[(isOptionFocused(i)? 'active' : ''), colorClass]"
+      (keydown)="focusNextOption($event)">{{option.label}}
       </button>
     </li>
   </ul>
