@@ -5,9 +5,10 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { SelectboxComponent } from './selectbox/selectbox.component';
 import { DirectiveModule } from '@takayuki-h/ngx-directive';
 import { TextfieldComponent } from './textfield/textfield.component';
+import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
 
 @NgModule({
-  declarations: [CheckboxComponent, SelectboxComponent, TextfieldComponent],
+  declarations: [CheckboxComponent, SelectboxComponent, TextfieldComponent, CheckboxGroupComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
