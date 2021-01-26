@@ -1,6 +1,5 @@
 
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { FormService } from '../form.service';
 import { ColorPreset } from '../types';
 import { CheckboxController } from '../checkbox-controller';
 
@@ -25,15 +24,17 @@ export class CheckboxComponent implements OnInit {
   public _label: string = 'Please check me!';
   public _controller: CheckboxController = new CheckboxController();
 
-  constructor(
-    private _f: FormService,
-  ) {
-  }
+  constructor() {}
 
   get darkClass(){ return (this.darkmode == 'enable')? 'dark' : (this.darkmode=="auto")? 'dark-auto' : ''; }
   get withValidatorClass(){ return this._controller.isValidationOn? 'with-validator' : ""; }
   get checkedClass(){ return (this._controller.value)? 'checked' : ''; }
-  get colorClass(){ return this.color == 'default'? '' : (this.color + (this._controller.value? ' active' : '')); }
+  get colorClass(){ 
+    const c = [];
+    if(this._controller.value){ c.push('active'); }
+    if(this.color !== 'default'){ c.push(this.color); }
+    return c.join(' ');
+  }
 
   getCheckboxClass(){ 
     var result = [];
