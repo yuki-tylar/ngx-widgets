@@ -1,0 +1,21 @@
+:host{
+  position: relative;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+.d-flex{  display: flex; align-items: flex-start; }
+
+.with-validator{ margin-bottom: 2.24em; }
+
+.error{
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  height: 2.4em;
+  color: red;
+  overflow: hidden;
+}

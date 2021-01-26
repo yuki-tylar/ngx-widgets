@@ -1,11 +1,146 @@
-$greyDark: #212121;
+$blue: var(--blue, #3D5AFE);
+$green: var(--green, #43A047);
+$orange: var(--orange, #EF6C00);
+$yellow: var(--yellow, #FFF176);
+$greyDark: var(--grey-dark, #212121);
 
-$blue: #3D5AFE;
-$green: #43A047;
-$orange: #EF6C00;
-$yellow: #FFF176;
+$bgPrimary: var(--ngx-form-primary, white);
+$textPrimary: var(--ngx-form-primary-font, inherit);
+$borderPrimary: $textPrimary;
 
-$blueLight: #3d5afe30;
-$greenLight: #43A04730;
-$orangeLight: #EF6C0030;
-$yellowLight: #FFF17630;
+$bgAccent: var(--ngx-form-accent, #FFF176);
+$textAccent: var(--ngx-form-accent-font, black);
+$borderAccent: $bgAccent;
+
+$borderSecondary: var(--ngx-form-secondary, #A6A6A6);
+
+$bgPrimaryDark: var(--ngx-form-primary-dark, #272727);
+$textPrimaryDark: var(--ngx-form-primary-font-dark, white);
+$borderPrimaryDark: $textPrimaryDark;
+
+$bgAccentDark: var(--ngx-form-accent-dark, #FFF176);
+$textAccentDark: var(--ngx-form-accent-font-dark, black);
+$borderAccentDark: $bgAccentDark;
+
+$borderSecondaryDark: var(--ngx-form-secondary-dark, black);
+
+$presetColors: (
+  "blue": (     "bg": $blue,      "text": white, "border": $blue), 
+  "green": (    "bg": $green,     "text": white, "border": $green), 
+  "orange": (   "bg": $orange,    "text": white, "border": $orange), 
+  "yellow": (   "bg": $yellow,    "text": black, "border": $yellow), 
+  "grey-dark": ("bg": $greyDark,  "text": white, "border": $greyDark)
+); 
+.color-bg{
+  background: $bgPrimary;
+  &.active{
+    background: $bgAccent;
+    @each $name, $value in $presetColors { &.#{$name}{ background: map-get($value, 'bg'); } }
+  }
+}
+
+.color-text{
+  color: $textPrimary;
+  &.active{ 
+    color: $textAccent;
+    @each $name, $value in $presetColors { &.#{$name}{ color: map-get($value, 'text'); } }
+  } 
+}
+
+.color-border{
+  border-color: $borderPrimary;
+  &.active{ 
+    border-color: $borderAccent; 
+    @each $name, $value in $presetColors { &.#{$name}{ border-color: map-get($value, 'border'); } }
+  }
+}
+
+.color-border-secondary{ border-color: $borderSecondary; }
+.color-border-indicator{ border-color: $borderSecondary; }
+
+.dark{
+  .color-bg{
+    background: $bgPrimaryDark;
+    &.active{ background: $bgAccentDark; }  
+  }
+
+  &.color-text{
+    color: $textPrimaryDark;
+    &.active{ color: $textAccentDark; } 
+  }
+
+  .color-border{
+    border-color: $borderPrimaryDark;
+    &.active{ color: $borderAccentDark; }
+  }
+
+  .color-border-secondary{ border-color: $borderSecondaryDark; }
+  .color-border-indicator{ border-color: $textPrimaryDark; }
+}
+
+.dark-auto{
+  @media (prefers-color-scheme: dark){
+    .color-bg{
+      background: $bgPrimaryDark;
+      &.active{ background: $bgAccentDark; }
+    }
+
+    .color-text{
+      color: $textPrimaryDark;
+      &.active{ color: $textAccentDark; } 
+    }
+
+    .color-border{
+      border-color: $borderPrimaryDark;
+      &.active{ color: $borderAccentDark; }
+    }
+
+    .color-border-secondary{ border-color: $borderSecondaryDark; }
+    .color-border-indicator{ border-color: $textPrimaryDark; }
+  }
+}
+
+
+
+
+
+
+
+// @mixin setColor($property, $value, $valueDark: null){
+//   #{$property}: $value;
+//   @if $valueDark {
+//     &.dark{ #{$property}: $valueDark; }
+//     &.dark-auto{ @media (prefers-color-scheme: dark){ #{$property}: $valueDark; }}  
+//   }
+// }
+// .bg-primary{ @include setColor(background, var(--ngx-form-primary, white), var(--ngx-form-primary-dark, #272727)); }
+// .text-primary{@include setColor(color, var(--ngx-form-primary-font, inherit), var(--ngx-form-primary-font-dark, white)); }
+// .border-primary{@include setColor(border-color, var(--ngx-form-primary-font, inherit), var(--ngx-form-primary-font-dark, white)); }
+
+// .bg-accent{ @include setColor(background, var(--ngx-form-accent, white), var(--ngx-form-accent-dark, #272727)); }
+// .text-accent{@include setColor(color, var(--ngx-form-accent-font, inherit), var(--ngx-form-accent-font-dark, white)); }
+// .border-accent{@include setColor(border-color, var(--ngx-form-accent, inherit), var(--ngx-form-accent-dark, white)); }
+
+// //.bg-secondary{ @include setColor(background, var(--ngx-form-secondary, white), var(--ngx-form-secondary-dark, #272727)); }
+// //.text-secondary{@include setColor(color, var(--ngx-form-secondary-font, inherit), var(--ngx-form-secondary-font-dark, white)); }
+// .border-secondary{@include setColor(border-color, var(--ngx-form-secondary, inherit), var(--ngx-form-secondary-dark, white)); }
+
+// .bg-blue{ @include setColor(background, var(--blue, $blue)); }
+// .text-blue{ @include setColor(color, var(--blue, $blue)); }
+// .border-blue{ @include setColor(border-color, var(--blue, $blue)); }
+
+// .bg-green{ @include setColor(background, var(--green, $green)); }
+// .text-green{ @include setColor(color, var(--green, $green)); }
+// .border-green{ @include setColor(border-color, var(--green, $green)); }
+
+// .bg-orange{ @include setColor(background, var(--orange, $orange)); }
+// .text-orange{ @include setColor(color, var(--orange, $orange)); }
+// .border-orange{ @include setColor(border-color, var(--orange, $orange)); }
+
+// .bg-yellow{ @include setColor(background, var(--yellow, $yellow)); }
+// .text-yellow{ @include setColor(color, var(--yellow, $yellow)); }
+// .border-yellow{ @include setColor(border-color, var(--yellow, $yellow)); }
+
+// .bg-grey-dark{ @include setColor(background, var(--grey-dark, $grey-dark)); }
+// .text-grey-dark{ @include setColor(color, var(--grey-dark, $grey-dark)); }
+// .border-grey-dark{ @include setColor(border-color, var(--grey-dark, $grey-dark)); }
