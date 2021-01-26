@@ -36,19 +36,6 @@ export class CheckboxComponent implements OnInit {
     return c.join(' ');
   }
 
-  getCheckboxClass(){ 
-    const result = [];
-    if(this._controller.value){ 
-      result.push('active'); 
-      if(this.color == 'default'){ result.push('border-accent'); }
-      else{ result.push('border-' + this.color); }
-    }else{
-      result.push('border-primary');
-      if(this.color == 'default'){ result.push('border-primary'); }
-    }
-    return result.join(' ');
-  }
-
   ngOnChanges(e: SimpleChanges){
     if(e.checked && e.checked.currentValue !== e.checked.previousValue){
       if(this.checked === undefined || this.checked === false || this.checked === 'false'){ this._controller.uncheck(false); }
@@ -65,8 +52,6 @@ export class CheckboxComponent implements OnInit {
 
     if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
   }
-
-
 
   onChange(e: Event){
     const isChecked = (e.target as HTMLInputElement).checked;
