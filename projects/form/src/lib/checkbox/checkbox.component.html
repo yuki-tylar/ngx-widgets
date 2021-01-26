@@ -1,12 +1,23 @@
-<div class="form-item-checkbox">
-  <div class="checkbox cursor-pointer"
-    [ngStyle]="{background: (_checked? (_color + '30') : 'inherit'), borderColor: (_checked? _color : 'inherit')}" 
-  >
-    <div class="check cursor-pointer" 
-      [ngStyle]="{borderColor: _color}" 
-      [ngClass]="{checked: _checked}"
-    ></div>
-    <input type="checkbox" (change)=onChange($event) [id]="_id">
+<div class="checkbox-container" 
+[ngClass]="[darkClass, withValidatorClass]"
+>
+  <div class="d-flex">
+    <div class="checkbox cursor-pointer color-border"
+    [ngClass]="[checkedClass, colorClass]"
+    > 
+      <div class="checkbox-bg color-bg"
+        [ngClass]="[colorClass]"
+      ></div>
+
+      <div class="check cursor-pointer color-border"
+      [ngClass]="[colorClass]"
+      ></div>
+
+      <input type="checkbox" (change)=onChange($event) [id]="_controller.id">
+    </div>
+    <label [for]="_controller.id" 
+    class="cursor-pointer text-primary"
+    >{{_label}}</label>
   </div>
-  <label [for]="_id" class="cursor-pointer">{{_label}}</label>
+  <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
 </div>

@@ -1,6 +1,8 @@
 
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, SimpleChanges } from '@angular/core';
-import { FormService, ColorPreset } from '../form.service';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { FormService } from '../form.service';
+import { ColorPreset } from '../types';
+import { CheckboxController } from '../checkbox-controller';
 
 @Component({
   selector: 'ngx-checkbox',
@@ -9,71 +11,75 @@ import { FormService, ColorPreset } from '../form.service';
 })
 export class CheckboxComponent implements OnInit {
 
-  @Input() id: string | number | null = null;
-  @Input() label: string | null = null;
-  @Input() checked: boolean = false;
-  @Input() color: ColorPreset | string = '';
+  @Input() id?: string | number;
+  @Input() label?: string;
+  @Input() checked?: boolean | string;
+  @Input() color: ColorPreset = 'default';
+  @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
-  @Output() changeState = new EventEmitter<ChangeCheckboxEvent>();
+  @Input() required: string | boolean = '';
 
-  public _id: string;
+  @Output() change = new EventEmitter<ChangeCheckboxEvent>();
+  @Output() getController = new EventEmitter<any>();
+
   public _label: string = 'Please check me!';
-  public _checked: boolean = false;
-  public _color: string = '';
-
-  private host: HTMLElement;
-  private input: HTMLInputElement | null = null;
+  public _controller: CheckboxController = new CheckboxController();
 
   constructor(
-    _el: ElementRef,
     private _f: FormService,
   ) {
-    this._id = _f.createId();
-    this.host = _el.nativeElement;
+  }
+
+  get darkClass(){ return (this.darkmode == 'enable')? 'dark' : (this.darkmode=="auto")? 'dark-auto' : ''; }
+  get withValidatorClass(){ return this._controller.isValidationOn? 'with-validator' : ""; }
+  get checkedClass(){ return (this._controller.value)? 'checked' : ''; }
+  get colorClass(){ return this.color == 'default'? '' : (this.color + (this._controller.value? ' active' : '')); }
+
+  getCheckboxClass(){ 
+    var result = [];
+    if(this._controller.value){ 
+      result.push('active'); 
+      if(this.color == 'default'){ result.push('border-accent'); }
+      else{ result.push('border-' + this.color); }
+    }else{
+      result.push('border-primary');
+      if(this.color == 'default'){ result.push('border-primary'); }
+    }
+    return result.join(' ');
   }
 
   ngOnChanges(e: SimpleChanges){
     if(e.checked && e.checked.currentValue !== e.checked.previousValue){
-      if(this.checked === true){ this.check(false);   }
-      else{                      this.uncheck(false); }
-    }
-
-    if(e.color && e.color.currentValue != e.color.previousValue){
-      this._color = this._f.setColor(this.color);
+      if(this.checked === undefined || this.checked === false || this.checked === 'false'){ this._controller.uncheck(false); }
+      else{ this._controller.check(false); }
     }
   }
 
   ngOnInit(): void {
-    if(this.id){ this._id = this.id.toString(); }
+    this._controller.setId(this.id);
     if(this.label){ this._label = this.label; }
-    if(this.checked === true){ this._checked = this.checked; }
-    this._color = this._f.setColor(this.color);
 
-    this.input = this.host.querySelector('input');
-    if(this._checked){ this.check(false); }
-    else{                this.uncheck(false); }
+    if(this.checked === undefined || this.checked === false || this.checked === 'false'){ this._controller.uncheck(false); }
+    else{ this._controller.check(false); }
+
+    if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
   }
 
-  check(emit: boolean = true){
-    this._checked = true;
-    if(this.input){ this.input.checked = true; }
-    if(emit){ this.changeState.emit({id: this._id, checked: true}); }
-  }
-  uncheck(emit: boolean = true){
-    this._checked = false;
-    if(this.input){ this.input.checked = false; }
-    if(emit){ this.changeState.emit({id: this._id, checked: false}); }
-  }
+
 
   onChange(e: Event){
     var target = e.target as HTMLInputElement;
     var isChecked = target.checked;
-    if(isChecked){ this.check(); }
-    else{ this.uncheck(); }
+    if(isChecked){ this._controller.check(); }
+    else{ this._controller.uncheck(); }
+
+    this.change.emit({id: this._controller.id, value: this._controller.value});
   }
+
+  emitController(){ this.getController.emit(this._controller); }
 }
 
 export type ChangeCheckboxEvent = {
-  checked: boolean;
+  value: boolean;
   id: string;
 }

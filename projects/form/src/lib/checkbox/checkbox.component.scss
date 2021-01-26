@@ -1,60 +1,65 @@
-:host{
-  font-size: 1em;
-  line-height: 1.5em;
-}
+@import "../assets/color";
+@import "../assets/general";
 
 .cursor-pointer{ cursor: pointer; }
 
-.form-item-checkbox{
+.checkbox-container{ position: relative; }
+
+label{
+  flex: 1 1 auto;
+  padding-left: 0.45em;
+  line-height: 1.2em;
+  user-select: none;
+  font-family: inherit;
+}
+
+.checkbox{
+  flex: 0 0 auto;
   position: relative;
-  display: flex;
-  align-items: flex-start;
+  width: 1.04em;
+  height: 1.04em;
+  margin-top: 0.08em;
+  border-radius: 0.2em;
+  border-style: solid;
+  border-width: 1px;
 
-  label{
-    flex: 1 1 auto;
-    padding-left: 0.45em;
-    line-height: 1.2em;
-    user-select: none;
-    font-family: inherit;
-  }
-
-  .checkbox{
-    flex: 0 0 auto;
-    position: relative;
-    width: 1.04em;
-    height: 1.04em;
-    margin-top: 0.08em;
-    border-radius: 0.2em;
-    border: solid 1px;
-    transition-property: border-color, background-color;
-    transition-duration: 0.2s;
-
-    .check{
-      position: absolute;
-      display: block;
-      top: -0.1em;
-      left: 0.15em;
-      opacity: 0;
-      width: 0.8em;
-      height: 0.4em;
-      border-color: inherit;
-      border-style: none none solid solid;
-      border-width: 0 0 0.37em 0.37em;
-      transform: rotate(-45deg);
-      transform-origin: center;
-      transition: 0.2s;
-
-      &.checked{ opacity: 1; }
-    }
-  }
-
-  input[type='checkbox']{
-    opacity: 0;
-    display: block;
+  .checkbox-bg{
     position: absolute;
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
+    top:0; 
+    left: 0;
+    opacity: 0;
   }
+
+  .check{
+    position: absolute;
+    display: block;
+    top: -0.1em;
+    left: 0.15em;
+    opacity: 0;
+    width: 0.8em;
+    height: 0.4em;
+    border-style: none none solid solid;
+    border-width: 0 0 0.37em 0.37em;
+    transform: rotate(-45deg);
+    transform-origin: center;
+  }
+
+  &.checked{
+    .checkbox-bg{ opacity: 0.2; }
+    .check{ opacity: 1; }
+  }
+}
+.checkbox, .check, .checkbox-bg{ transition: 0.2s; }
+
+
+input[type='checkbox']{
+  opacity: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
