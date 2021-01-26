@@ -9,8 +9,8 @@ import { ChangeSelectEvent , ChangeCheckboxEvent} from 'form';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  public colorset = ['blue', 'green', 'orange', 'red', 'black', '#cccccc'];
-  public color: string = 'green';
+  public colorset = ['blue', 'green', 'orange', 'yellow', 'grey-dark', 'default'];
+  public color: string = 'default';
 
   public statesetCheckbox = ['check', 'uncheck'];
   public checked = false;
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   onChange(e: ChangeCheckboxEvent){
-    this.checked = e.checked;
+    this.checked = e.value;
   }
 
   onChangeSelect(e: ChangeSelectEvent){

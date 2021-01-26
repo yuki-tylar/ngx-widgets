@@ -3,17 +3,18 @@
 
 :root{
 
-  // --ngx-form-accent: #3375C3;
-  // --ngx-form-accent-font: white;
-  // --ngx-form-primary: white;
-  // --ngx-form-primary-font: black;
-  // --ngx-form-secondary: grey;
+  --ngx-form-accent: #3375C3;
+  --ngx-form-accent-font: white;
+  --ngx-form-primary: white;
+   --ngx-form-primary-font: black;
+  --ngx-form-secondary: grey;
 
-  // --ngx-form-accent-dark: blue;
-  // --ngx-form-accent-font-dark: white;
-  // --ngx-form-primary-dark: black;
-  // --ngx-form-primary-font-dark: white;  
-  // --ngx-form-secondary-dark: grey;
+  --ngx-form-accent-dark: yellow;
+  --ngx-form-accent-font-dark: black;
+  --ngx-form-primary-dark: black;
+  --ngx-form-primary-font-dark: white;  
+  --ngx-form-secondary-dark: black;
+
 }
 
 body{
@@ -22,9 +23,9 @@ body{
 
   color: black;
   background: white;
-  @media (prefers-color-scheme: dark){
-    // color: white;
-    // background: black;
-  }
+  // @media (prefers-color-scheme: dark){
+  //   color: white;
+  //   background: black;
+  // }
 
 }

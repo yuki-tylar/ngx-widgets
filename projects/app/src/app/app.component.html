@@ -6,7 +6,6 @@
 <div>
   <ngx-selectbox 
   [color]="color" 
-  darkmode="disable"
   [required]="'必ずセレクトしてください'"
   [options]="optionsSelect" 
   [selected]="selected" 
@@ -24,7 +23,13 @@
 </div>
 
 <div class="form-checkbox-group">
-  <ngx-checkbox [checked]="checked" [color]='color' [label]="'test1'" (changeState)="onChange($event)"></ngx-checkbox>
+  <ngx-checkbox 
+  [checked]="checked" 
+  [color]='color' 
+  [label]="'test1'" 
+  [required]="true"
+  (changeState)="onChange($event)"
+  ></ngx-checkbox>
 </div>
 
 <div class="form-textfield-group">
