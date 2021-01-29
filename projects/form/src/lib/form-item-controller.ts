@@ -2,10 +2,11 @@ import { FormValidationName } from './types';
 
 export interface IFormItemController{
   id: string;
-  isValid: boolean;
-  isInvalid: boolean;
   isTouched: boolean;
   isDirty: boolean;
+
+  isValid: boolean;
+  isInvalid: boolean;
   isValidationOn: boolean
 
   errors: FormValidationName[];
@@ -16,19 +17,23 @@ export class FormItemController implements IFormItemController{
   private _id: string = '';
   private _isTouched: boolean = false;
   private _isDirty: boolean = false;
-  protected _validators: Map<FormValidationName, {isValid: boolean, message: string}> = new Map();
+  private _validators: Map<FormValidationName, {isValid: boolean, message: string}> = new Map();
 
   get id(){ return this._id; }
   get isTouched(){ return this._isTouched; }
   get isDirty(){ return this._isDirty; }
+  
   get isValidationOn(){return (this._validators.size > 0); }
+
+  get validators(){ return this._validators; }
 
   get isValid(){
     let isValid = true;
     this._validators.forEach(v=>{ if(!v.isValid){ isValid = false; } });
     return isValid;
   }
-  get isInvalid(){ return this.isValid; }
+  get isInvalid(){ return !this.isValid; }
+
   get errors(){
     const errors: FormValidationName[] = [];
     this._validators.forEach((v,k)=>{ if(v.isValid){ errors.push(k); } })

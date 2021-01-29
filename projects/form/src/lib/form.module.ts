@@ -8,12 +8,22 @@ import { TextfieldComponent } from './textfield/textfield.component';
 import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
 
 @NgModule({
-  declarations: [CheckboxComponent, SelectboxComponent, TextfieldComponent, CheckboxGroupComponent],
+  declarations: [
+    CheckboxComponent, 
+    SelectboxComponent, 
+    TextfieldComponent, 
+    CheckboxGroupComponent,
+  ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
     DirectiveModule,
   ],
-  exports: [CheckboxComponent, SelectboxComponent, TextfieldComponent]
+  exports: [
+    CheckboxComponent,
+    SelectboxComponent,
+    TextfieldComponent,
+    CheckboxGroupComponent,
+  ]
 })
 export class FormModule { }

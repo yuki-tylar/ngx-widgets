@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { ColorPreset } from '../types';
+import { ColorPreset, ChangeCheckboxEvent } from '../types';
 import { CheckboxController } from '../checkbox-controller';
 
 @Component({
@@ -11,14 +11,16 @@ import { CheckboxController } from '../checkbox-controller';
 export class CheckboxComponent implements OnInit {
 
   @Input() id?: string | number;
+
   @Input() label?: string;
   @Input() checked?: boolean | string;
+
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
-  @Input() required: string | boolean = '';
+  @Input() required: string | boolean = false;
 
-  @Output() change = new EventEmitter<ChangeCheckboxEvent>();
+  @Output() changeValue = new EventEmitter<ChangeCheckboxEvent>();
   @Output() getController = new EventEmitter<any>();
 
   public _label: string = 'Please check me!';
@@ -51,20 +53,17 @@ export class CheckboxComponent implements OnInit {
     else{ this._controller.check(false); }
 
     if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
+
   }
 
-  onChange(e: Event){
-    const isChecked = (e.target as HTMLInputElement).checked;
-    if(isChecked){ this._controller.check(); }
+
+  onChange(){
+    const isChecked = this._controller.value;
+    if(!isChecked){ this._controller.check(); }
     else{ this._controller.uncheck(); }
 
-    this.change.emit({id: this._controller.id, value: this._controller.value});
+    this.changeValue.emit({id: this._controller.id, value: this._controller.value});
   }
 
   emitController(){ this.getController.emit(this._controller); }
-}
-
-export type ChangeCheckboxEvent = {
-  value: boolean;
-  id: string;
 }

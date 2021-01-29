@@ -1,73 +1,96 @@
-import { Option, FormValidationName } from './types';
+import { IOption, Option, FormValidationName } from './types';
 import { IFormItemController, FormItemController } from './form-item-controller';
 
 export interface ISelectController extends IFormItemController{
-  index: number /** index of selected options */
-  value: string;
   isSelected: boolean;
-  options: Option[]; 
+  options: IOption[];
+
+  index: number /** index of selected option | first index of selected options for multiple selection */
+  value: string; /** label of selected option | first label of selected options for multiple selection */
 }
 
 export class SelectController extends FormItemController implements ISelectController{
 
-  private _options: Option[] = [];
-  private _index: number = -1;
+  protected _options: Option[] = [];
+  
+  get options(){ return this._options; }    /** get all options */
 
-  get options(){ return this._options; }
-  get value(){ return this.isSelected? this._options[this.index].label : ''; }
-  get index(){ return this._index; }
-
-  get isSelected(){ return (this._index < 0)? false : true; }
-
-  constructor(){
-    super()
+  /** get index of first option which is selected */
+  get index(){
+    let idx = -1;
+    for(var i=0; i<this._options.length; i++){ if(this._options[i].isSelected){ idx = i; break; } }
+    return idx;
   }
 
-  setOptions(options: Option[]){ this._options = options; }
+  /** get value of first option which is selected */
+  get value(){ return this.isSelected? this._options[this.index].label : ''; }
+
+  get isSelected(){ return (this.index < 0)? false : true; }
+
+
+  constructor(){ super(); }
+
+  setOption(option: IOption){ this._options = [new Option(option)]; }
+  setOptions(options: IOption[]){ 
+    this._options = [];
+    options.forEach(o=>{ this._options.push(new Option(o)); })
+  }
 
   setValidator(name: FormValidationName, val: string | boolean, defaultMessage: string){
     let message: string;
     if(typeof val == 'string'){ message = (val == 'true' || val == '')? defaultMessage : val;}
     else{ message = defaultMessage; }
    
-    let isValid: boolean = false; 
-    if(name == 'required' && this._index >= 0){ isValid = true; }
-
-    this._validators.set(name, {isValid: isValid, message: message})
+    this.validators.set(name, {isValid: false, message: message});
+    this.validate();
   }
 
-
-  select(o: number | Option): boolean{
-    let index: number = -1;
-    if(typeof o == 'number'){ index = o; }
+  protected getOption(o: number | IOption): Option{
+    let theOption: Option;
+    if(typeof o == 'number'){ theOption = this._options[o]; }
     else{
+      let theIndex = 0;
       for(let i=0; i<this._options.length; i++){
-        if(this._options[i].id == o.id){
-          index = i;
-          break;
-        }
+        if(this._options[i].id == o.id){ theIndex = i; break; }
       }
+      theOption = this._options[theIndex]
     }
-    if(index < 0){ return false; }
-
-    this._index = index;  
-    this.dirty();
-    this.touch();  
-
-    const required = this._validators.get('required');
-    if(required){ required.isValid = true; }
-
-    return true;
+    return theOption;
   }
 
-  deselect(): boolean{
-    this._index = -1;
+   select(o: number | IOption): boolean{
+     let theOption = this.getOption(o);
+     if(!theOption){ return false; }
+     else if(theOption.isSelected){
+       this.touch();
+       return false;
+     }
+     else{
+       this.deselect();
+       theOption.select();
+       this.dirty();
+       this.touch();
+       this.validate();
+       return true;
+     }
+  }
+
+  deselect(o?: number | IOption): boolean{
+    if(o === undefined){ this._options.forEach(o=>{ o.deselect(); })}
+    else{
+      const theOption = this.getOption(o);
+      theOption.deselect();
+    }
+    
     this.dirty();
     this.touch();
+    this.validate();
 
-    const required = this._validators.get('required');
-    if(required){ required.isValid = false; }
-    
     return true;
+  }
+
+  validate(){
+    const required = this.validators.get('required');
+    if(required){ required.isValid = (this.index >=0 )? true : false; }
   }
 }

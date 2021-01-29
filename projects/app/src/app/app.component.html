@@ -1,5 +1,9 @@
+<div style="margin-bottom: 20px;">
+  <button *ngFor="let c of colorset;" (click)="setColor(c)">{{c | titlecase}}</button>
+</div>
+
 <div>
-  <button (click)="selectController.deselect(null)">Deselect</button>
+  <button (click)="selectController.deselect()">Deselect</button>
   <button *ngFor="let o of optionsSelect; let i = index;" (click)="selectController.select(i)">Select {{o.label}}</button>
   <button (click)="selectController.clean()">Clean</button>
 </div>
@@ -9,14 +13,12 @@
   [required]="'必ずセレクトしてください'"
   [options]="optionsSelect" 
   [selected]="selected" 
-  (change)="onChangeSelect($event)"
+  (changeValue)="onChangeSelect($event)"
   (getController)="subscribeValidate($event)"
   ></ngx-selectbox>
 </div>
 
-<div>
-  <button *ngFor="let c of colorset;" (click)="setColor(c)">{{c | titlecase}}</button>
-</div>
+
 
 <div>
   <button *ngFor="let s of statesetCheckbox" (click)="setStateCheckbox(s)">{{s | titlecase}}</button>
@@ -28,9 +30,23 @@
   [color]='color' 
   [label]="'test1'" 
   [required]="true"
-  (changeState)="onChange($event)"
+  (changeValue)="onChange($event)"
   ></ngx-checkbox>
 </div>
+
+<div>
+  <button (click)="checkboxGroupController.deselectAll()">Deselect All</button>
+  <button *ngFor="let o of optionsSelect; let i = index;" (click)="checkboxGroupController.toggle(i)">Toggle {{o.label}}</button>
+  <button (click)="checkboxGroupController.selectAll()">Select All</button>
+  <button (click)="checkboxGroupController.clean()">Clean</button>
+</div>
+<ngx-checkbox-group
+[options]="optionsSelect"
+[color]="color"
+required
+(changeValue)="onChangeCheckboxGroup($event)"
+(getController)="getCheckboxGroupController($event)"
+></ngx-checkbox-group>
 
 <div class="form-textfield-group">
   <ngx-textfield></ngx-textfield>

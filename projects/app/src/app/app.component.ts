@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangeSelectEvent , ChangeCheckboxEvent} from 'form';
+import { ChangeSelectEvent , ChangeCheckboxEvent, ChangeSelectMultiEvent} from 'form';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   public statesetCheckbox = ['check', 'uncheck'];
   public checked = false;
 
-  public optionsSelect = [{id: 1, label: 'test1'},{id: 2, label: 'test2'}, {id: 1, label: 'test3'},  ]
+  public optionsSelect = [{id: 1, label: 'test1'},{id: 2, label: 'test2'}, {id: 3, label: 'test3'},  ]
   public selected: number | null = null;
 
   ngOnInit(){
@@ -41,8 +41,17 @@ export class AppComponent implements OnInit {
     this.selected = e.index;
   }
 
+  onChangeCheckboxGroup(e: ChangeSelectMultiEvent){
+    console.log(e);
+  }
+
   private selectController: any;
   subscribeValidate(e: any){
     this.selectController = e;
+  }
+
+  private checkboxGroupController: any;
+  getCheckboxGroupController(e: any){
+    this.checkboxGroupController = e;
   }
 }
