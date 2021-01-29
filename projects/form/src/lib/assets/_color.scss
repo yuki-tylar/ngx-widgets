@@ -35,7 +35,7 @@ $presetColors: (
   background: $bgPrimary;
   &.active{
     background: $bgAccent;
-    @each $name, $value in $presetColors { &.#{$name}{ background: map-get($value, 'bg'); } }
+    @each $name, $value in $presetColors { &.#{$name}{ background: map-get($value, 'bg') !important; } }
   }
 }
 
@@ -43,7 +43,7 @@ $presetColors: (
   color: $textPrimary;
   &.active{ 
     color: $textAccent;
-    @each $name, $value in $presetColors { &.#{$name}{ color: map-get($value, 'text'); } }
+    @each $name, $value in $presetColors { &.#{$name}{ color: map-get($value, 'text') !important; } }
   } 
 }
 
@@ -51,7 +51,7 @@ $presetColors: (
   border-color: $borderPrimary;
   &.active{ 
     border-color: $borderAccent; 
-    @each $name, $value in $presetColors { &.#{$name}{ border-color: map-get($value, 'border'); } }
+    @each $name, $value in $presetColors { &.#{$name}{ border-color: map-get($value, 'border') !important; } }
   }
 }
 
@@ -71,7 +71,7 @@ $presetColors: (
 
   .color-border{
     border-color: $borderPrimaryDark;
-    &.active{ color: $borderAccentDark; }
+    &.active{ border-color: $borderAccentDark; }
   }
 
   .color-border-secondary{ border-color: $borderSecondaryDark; }
@@ -92,7 +92,7 @@ $presetColors: (
 
     .color-border{
       border-color: $borderPrimaryDark;
-      &.active{ color: $borderAccentDark; }
+      &.active{ border-color: $borderAccentDark; }
     }
 
     .color-border-secondary{ border-color: $borderSecondaryDark; }

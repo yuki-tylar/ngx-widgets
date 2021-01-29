@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, HostListener, ElementRef, SimpleChanges } from '@angular/core';
-import { FormService } from '../form.service';
 import { SelectController } from '../select-controller';
-import { Option, ColorPreset } from '../types';
+import { IOption, ColorPreset, ChangeSelectEvent } from '../types';
 import { slideinAnimation } from "../animations";
 
 @Component({
@@ -13,14 +12,14 @@ import { slideinAnimation } from "../animations";
 export class SelectboxComponent implements OnInit {
 
   @Input() id?: string | number;
-  @Input() options: Option[] = [];
-  @Input() selected?: number | Option;
+  @Input() options: IOption[] = [];
+  @Input() selected?: number | IOption;
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
-  @Input() required: string | boolean = '';
+  @Input() required: string | boolean = false;
 
-  @Output() change = new EventEmitter<ChangeSelectEvent>();
+  @Output() changeValue = new EventEmitter<ChangeSelectEvent>();
   @Output() getController = new EventEmitter<SelectController>();
 
   public _idxOptionFocused: number = 0;
@@ -36,7 +35,6 @@ export class SelectboxComponent implements OnInit {
   get colorClass(){ return this.color == 'default'? '' : this.color; }
 
   constructor(
-    private _f: FormService,
     private _changeDetector: ChangeDetectorRef,
     _el: ElementRef,
   ) {
@@ -45,7 +43,6 @@ export class SelectboxComponent implements OnInit {
   }
 
   ngOnChanges(e: SimpleChanges){
-    // if(e.color && e.color.currentValue != e.color.previousValue){}
     if(e.selected && e.selected.currentValue != e.selected.previousValue){
       if(typeof this.selected == 'number' || this.selected){ this._controller.select(this.selected); }
       else{ this._controller.deselect(); }
@@ -133,15 +130,11 @@ export class SelectboxComponent implements OnInit {
     this._idxOptionFocused = idx;
 
     this.toggleExpand('hide', isCloseImmediately);
-    if(emit){ this.change.emit({id: this._controller.id, index: this._controller.index}) }
+    if(emit){ 
+      var idx = this._controller.index;
+      this.changeValue.emit({id: this._controller.id, index: idx, selected: this._controller.options[idx]}) 
+    }
   }
 
   emitController(){ this.getController.emit(this._controller); }
 }
-
-
-export type ChangeSelectEvent = {
-  id: string;
-  index: number;
-}
-
