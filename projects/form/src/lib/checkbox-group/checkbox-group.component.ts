@@ -13,7 +13,7 @@ export class CheckboxGroupComponent implements OnInit {
   @Input() options: IOption[] = [];
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
-  @Input() layout: 'flex' | 'block' | 'responsive' = 'responsive';
+  @Input() layout: 'block' | 'inline' = 'block';
 
   @Input() required: string | boolean = '';
 

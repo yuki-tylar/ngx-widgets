@@ -1,11 +1,14 @@
-<div [ngClass]="layoutClass">
-  <div class="ngx-checkbox-container" *ngFor="let option of _controller.options; let i = index;">
-    <ngx-checkbox 
-    [label]="option.label"
-    [color]="this.color"
-    [darkmode]="this.darkmode"
-    [checked]="option.isSelected"
-    (changeValue)="onChange($event, i)"
-    ></ngx-checkbox>
-  </div>
+<div [ngClass]="layoutClass" class="position-relative">
+  <ul class="checkbox-group">
+    <li *ngFor="let option of _controller.options; let i = index;">
+      <ngx-checkbox 
+      [label]="option.label"
+      [color]="this.color"
+      [darkmode]="this.darkmode"
+      [checked]="option.isSelected"
+      (changeValue)="onChange($event, i)"
+      ></ngx-checkbox>  
+    </li>
+  </ul>
+  <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
 </div>
