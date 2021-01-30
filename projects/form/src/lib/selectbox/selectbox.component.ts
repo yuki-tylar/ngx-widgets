@@ -17,7 +17,8 @@ export class SelectboxComponent implements OnInit {
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
-  @Input() required: string | boolean = false;
+  @Input() required?: string | boolean;
+  @Input() requiredError?: string;
 
   @Output() changeValue = new EventEmitter<ChangeSelectEvent>();
   @Output() getController = new EventEmitter<SelectController>();
@@ -56,8 +57,8 @@ export class SelectboxComponent implements OnInit {
     this._controller.setOptions(this.options);
 
     if(this.selected){ this._controller.select(this.selected);}
-    if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
-  
+    this._controller.setValidatorRequired({required: this.required, message: this.requiredError})    
+    this._controller.validate();
     this.emitController();
   }
 
