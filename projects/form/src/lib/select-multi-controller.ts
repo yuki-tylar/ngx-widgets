@@ -68,4 +68,15 @@ export class SelectMultiController extends SelectController implements ISelectMu
     this.deselect();
     return true;
   }
+
+  validate(){
+    const required = this.validators.get('required');
+    if(required){ required.isValid = (this.index >=0 )? true : false; }
+
+    const min = this.validators.get('min');
+    if(min){ min.isValid = (!min.value || this.indexes.length >= min.value)? true : false; }
+
+    const max = this.validators.get('max');
+    if(max){ max.isValid = (!max.value|| this.indexes.length <= max.value)? true : false; }
+  }
 }
