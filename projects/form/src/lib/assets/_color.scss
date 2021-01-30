@@ -41,11 +41,17 @@ $presetColors: (
 
 .color-text{
   color: $textPrimary;
+  &.accent{ 
+    color: $bgAccent;
+    @each $name, $value in $presetColors { &.#{$name}{ color: map-get($value, 'bg') !important; } }
+  }
+
   &.active{ 
     color: $textAccent;
     @each $name, $value in $presetColors { &.#{$name}{ color: map-get($value, 'text') !important; } }
-  } 
+  }
 }
+
 
 .color-border{
   border-color: $borderPrimary;
