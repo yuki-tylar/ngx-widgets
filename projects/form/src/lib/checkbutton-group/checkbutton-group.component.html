@@ -1,0 +1,14 @@
+<div [ngClass]="layoutClass" class="position-relative">
+  <ul class="checkbutton-group">
+    <li *ngFor="let option of _controller.options; let i = index;">
+      <ngx-checkbutton
+      [label]="option.label"
+      [color]="this.color"
+      [darkmode]="this.darkmode"
+      [checked]="option.isSelected"
+      (changeValue)="onChange($event, i)"
+      ></ngx-checkbutton>
+    </li>
+  </ul>
+  <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
+</div>

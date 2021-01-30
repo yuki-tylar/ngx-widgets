@@ -57,6 +57,17 @@ required
 [color]="color"
 ></ngx-checkbutton>
 
+
+<ngx-checkbutton-group
+[options]="optionsSelect"
+[color]="color"
+required
+[min]="2"
+[max]="'2'"
+(changeValue)="onChangeCheckboxGroup($event)"
+(getController)="getCheckboxGroupController($event)"
+></ngx-checkbutton-group>
+
 <div class="form-textfield-group">
   <ngx-textfield></ngx-textfield>
 </div>

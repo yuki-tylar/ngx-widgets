@@ -7,6 +7,7 @@ import { DirectiveModule } from '@takayuki-h/ngx-directive';
 import { TextfieldComponent } from './textfield/textfield.component';
 import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
 import { CheckbuttonComponent } from './checkbutton/checkbutton.component';
+import { CheckbuttonGroupComponent } from './checkbutton-group/checkbutton-group.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { CheckbuttonComponent } from './checkbutton/checkbutton.component';
     SelectboxComponent, 
     TextfieldComponent, 
     CheckboxGroupComponent, 
-    CheckbuttonComponent,
+    CheckbuttonComponent, CheckbuttonGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +27,8 @@ import { CheckbuttonComponent } from './checkbutton/checkbutton.component';
     SelectboxComponent,
     TextfieldComponent,
     CheckboxGroupComponent,
-    CheckbuttonComponent
+    CheckbuttonComponent,
+    CheckbuttonGroupComponent
   ]
 })
 export class FormModule { }
