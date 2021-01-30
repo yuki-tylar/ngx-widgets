@@ -36,15 +36,6 @@ export class SelectController extends FormItemController implements ISelectContr
     options.forEach(o=>{ this._options.push(new Option(o)); })
   }
 
-  setValidator(name: FormValidationName, val: string | boolean, defaultMessage: string){
-    let message: string;
-    if(typeof val == 'string'){ message = (val == 'true' || val == '')? defaultMessage : val;}
-    else{ message = defaultMessage; }
-   
-    this.validators.set(name, {isValid: false, message: message});
-    this.validate();
-  }
-
   protected getOption(o: number | IOption): Option{
     let theOption: Option;
     if(typeof o == 'number'){ theOption = this._options[o]; }
