@@ -89,8 +89,8 @@ export class CheckbuttonComponent implements OnInit {
       style({transform: `translate(0) scale(1)`, offset: 1}),
     ]) : [
       style({transform: `translate(0) scale(1)`, offset: 0}),
-      style({transform: `translate(0, ${yr}%) scale(1, 0.1)`, offset: 0.5}),
-      style({transform: `translate(${xr}%, ${yr}%) scale(0, 0.1)`, offset: 1}),
+      style({transform: `translate(0, 45%) scale(1, 0.1)`, offset: 0.5}),
+      style({transform: `translate(50% , 45%) scale(0, 0.1)`, offset: 1}),
     ])
 
     const animation = animate('450ms ease', kf);
