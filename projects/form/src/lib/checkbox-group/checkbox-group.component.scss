@@ -22,3 +22,20 @@
     }
   }
 }
+
+.col2{
+  .checkbox-group{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    margin-bottom: -1em;
+
+    li{
+      flex: 1 0 50%;
+      margin: 0 0 1em;
+      &:nth-child(2n-1){ padding-right: 2.8em; }
+      box-sizing: border-box;
+    }
+  }
+}
