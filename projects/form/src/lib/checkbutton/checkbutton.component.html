@@ -1,0 +1,14 @@
+<div class="checkbutton-container position-relative"
+[ngClass]="[darkClass, withValidatorClass]"
+>
+  <button type="button"
+  class="checkbutton cursor-pointer color-border active animate" 
+  [ngClass]="color"
+  (click)="onChange($event)"
+  >
+    <div class="checkbutton-bg color-bg"></div>
+    <div class="checkbutton-bg ripple color-bg active"></div>
+    <span class="position-relative color-text accent animate" [ngClass]="colorLabelClass">{{_label}}</span>
+  </button>
+  <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
+</div>
