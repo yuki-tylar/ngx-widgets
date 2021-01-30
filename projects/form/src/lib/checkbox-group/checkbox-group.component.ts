@@ -13,9 +13,16 @@ export class CheckboxGroupComponent implements OnInit {
   @Input() options: IOption[] = [];
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
-  @Input() layout: 'block' | 'inline' = 'block';
+  @Input() layout: 'block' | 'inline' | 'col2' = 'inline';
 
-  @Input() required: string | boolean = '';
+  @Input() required?: string | boolean;
+  @Input() min?: string | number;
+  @Input() max?: string | number;
+
+  @Input() requiredError?: string;
+  @Input() minError?: string;
+  @Input() maxError?: string;
+
 
   @Output() changeValue = new EventEmitter<ChangeSelectMultiEvent>();
   @Output() getController = new EventEmitter<SelectMultiController>();
@@ -38,8 +45,10 @@ export class CheckboxGroupComponent implements OnInit {
     this._controller.setId(this.id);
     this._controller.setOptions(this.options);
 
-    if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
-
+    this._controller.setValidatorRequired({required: this.required, message: this.requiredError})    
+    this._controller.setValidatorMin({min: this.min, message: this.minError});
+    this._controller.setValidatorMax({max: this.max, message: this.maxError});
+    this._controller.validate();
     this.emitController();
   }
 
