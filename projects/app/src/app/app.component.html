@@ -10,7 +10,7 @@
 <div>
   <ngx-selectbox 
   [color]="color" 
-  [required]="'必ずセレクトしてください'"
+  required
   [options]="optionsSelect" 
   [selected]="selected" 
   (changeValue)="onChangeSelect($event)"
@@ -28,8 +28,8 @@
   <ngx-checkbox 
   [checked]="checked" 
   [color]='color' 
+  required
   [label]="'test1'" 
-  [required]="true"
   (changeValue)="onChange($event)"
   ></ngx-checkbox>
 </div>
@@ -44,6 +44,8 @@
 [options]="optionsSelect"
 [color]="color"
 required
+[min]="2"
+[max]="'2'"
 (changeValue)="onChangeCheckboxGroup($event)"
 (getController)="getCheckboxGroupController($event)"
 ></ngx-checkbox-group>
