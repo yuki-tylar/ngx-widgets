@@ -43,11 +43,6 @@ export class CheckbuttonComponent implements OnInit {
     if(this._controller.value){ c.push('active'); }
     return c;
   }
-  get colorBgClass(){ 
-    const c: string[] = [this.color];
-    if(this._controller.value){ c.push('active'); }
-    return c;
-  }
 
   ngOnChanges(e: SimpleChanges){
     if(e.checked && e.checked.currentValue !== e.checked.previousValue){
