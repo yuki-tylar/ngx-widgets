@@ -18,7 +18,8 @@ export class CheckboxComponent implements OnInit {
   @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
 
-  @Input() required: string | boolean = false;
+  @Input() required?: string | boolean;
+  @Input() requiredError?: string;
 
   @Output() changeValue = new EventEmitter<ChangeCheckboxEvent>();
   @Output() getController = new EventEmitter<any>();
@@ -52,7 +53,8 @@ export class CheckboxComponent implements OnInit {
     if(this.checked === undefined || this.checked === false || this.checked === 'false'){ this._controller.uncheck(false); }
     else{ this._controller.check(false); }
 
-    if(this.required !== false && this.required !== 'false'){ this._controller.setValidator('required', this.required, 'Required!'); }
+    this._controller.setValidatorRequired({required: this.required, message: this.requiredError})    
+    this._controller.validate();
 
   }
 
