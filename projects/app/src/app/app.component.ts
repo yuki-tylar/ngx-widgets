@@ -45,6 +45,11 @@ export class AppComponent implements OnInit {
     console.log(e);
   }
 
+  public valInput = '';
+  onChangeValue(e: any){
+    this.valInput = e.value;
+  }
+
   private selectController: any;
   subscribeValidate(e: any){
     this.selectController = e;

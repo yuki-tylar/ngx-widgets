@@ -68,6 +68,15 @@ required
 (getController)="getCheckboxGroupController($event)"
 ></ngx-checkbutton-group>
 
+<button (click)="valInput = 'testtest'">change value to "testtest"</button>
 <div class="form-textfield-group">
-  <ngx-textfield></ngx-textfield>
+  <ngx-textfield 
+  [label]="'firstname'" 
+  [value]="valInput"
+  hint="this is hint"
+  required
+  min="5"
+  max="20"
+  (changeValue)="onChangeValue($event)"
+  ></ngx-textfield>
 </div>
