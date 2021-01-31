@@ -37,9 +37,7 @@ export class CheckboxGroupComponent implements OnInit {
     return c;
   }
 
-  ngOnChanges(e: SimpleChanges){
-
-  }
+  ngOnChanges(e: SimpleChanges){}
 
   ngOnInit(): void {
     this._controller.setId(this.id);

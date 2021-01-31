@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import { FormValidationName } from './types';
 
 export interface IFormItemController{
@@ -9,6 +10,7 @@ export interface IFormItemController{
   isInvalid: boolean;
   isValidationOn: boolean
 
+  validators: Map<FormValidationName, {isValid: boolean, message: string, value?: number}>;
   errors: FormValidationName[];
   errorMessage: string;
 }
