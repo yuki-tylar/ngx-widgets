@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CheckbuttonComponent } from './checkbutton.component';
 
@@ -8,7 +9,8 @@ describe('CheckbuttonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckbuttonComponent ]
+      declarations: [ CheckbuttonComponent ],
+      imports: [ NoopAnimationsModule ]
     })
     .compileComponents();
   });
