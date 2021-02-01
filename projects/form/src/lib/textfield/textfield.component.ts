@@ -13,24 +13,30 @@ export class TextfieldComponent implements OnInit {
   @Input() label: string = 'label';
   @Input() value?: string = '';
   @Input() hint?: string;
+  @Input() type: string = 'text';
 
   @Input() required?: string | boolean;
   @Input() min?: string | number;
   @Input() max?: string | number;
+  @Input() email?: string | boolean;
 
   @Input() requiredError?: string;
   @Input() minError?: string;
   @Input() maxError?: string;
+  @Input() emailError?: string;
 
   @Output() changeValue = new EventEmitter<ChangeTextfieldEvent>();
   @Output() getController = new EventEmitter<TextfieldController>();
   
   public isFocus: boolean = false;
+  public isPasswordShown: boolean = false;
+
   public _controller: TextfieldController = new TextfieldController();
   private timer: any;
   
   constructor() {}
 
+  get inputType(){ return (this.type == 'password' && !!this.isPasswordShown)? 'text' : this.type; }
   get borderClass(){ return this.isFocus? 'color-border active' : 'color-border-secondary'; }
   get withHintClass(){ return (this.hint && this.hint.length > 0)? 'with-hint' : ''; }
   get labelColorClass(){ return this.isFocus? 'color-text accent' : 'color-text-secondary'}
@@ -44,6 +50,13 @@ export class TextfieldComponent implements OnInit {
        (e.requiredError && !e.requiredError.firstChange)
     ){ 
       this._controller.setValidatorRequired({required: this.required, message: this.requiredError}); 
+      this._controller.validate();
+    }
+
+    if((e.email && !e.email.firstChange) ||
+       (e.emailError && !e.emailError.firstChange)
+    ){
+      this._controller.setValidatorEmail({email: this.email, message: this.emailError}); 
       this._controller.validate();
     }
 
@@ -74,6 +87,7 @@ export class TextfieldComponent implements OnInit {
     this._controller.setValidatorRequired({required: this.required, message: this.requiredError});
     this._controller.setValidatorMin({min: this.min, message: this.minError});
     this._controller.setValidatorMax({max: this.max, message: this.maxError});
+    this._controller.setValidatorEmail({email: this.email, message: this.requiredError});
     this._controller.validate();
     this.emitController();
   }
@@ -87,6 +101,8 @@ export class TextfieldComponent implements OnInit {
     this.isFocus = false; 
     this._controller.dirty();
   }
+
+  togglePassword(){ this.isPasswordShown = !this.isPasswordShown; }
 
   onInput(e: InputEvent){
     if(this.timer){ clearTimeout(this.timer); }

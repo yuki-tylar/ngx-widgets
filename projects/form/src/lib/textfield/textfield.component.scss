@@ -2,11 +2,12 @@
 @import "../assets/general";
 
 .textfield, input{ position: relative; }
-.textfield-bg, label, .hint{ position: absolute; }
+.textfield-bg, label, .hint, ngx-icon-lock{ position: absolute; }
 
 input{ z-index: 3; }
 .text-field-bg{z-index: 1; }
 label, .hint{ z-index: 2; }
+ngx-icon-lock{ z-index: 4; }
 
 .textfield{
   border-radius: 10px;
@@ -49,6 +50,16 @@ input{
   &.with-hint{
     padding-bottom: 1.1em;
   }
+  &[type=password]{
+    padding-right: 3.2em;
+  }
+}
+
+ngx-icon-lock{
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 2em;
 }
 
 .hint{

@@ -9,14 +9,15 @@ class="textfield-container position-relative with-validator"
     [ngClass]="[labelColorClass, labelShrinkClass]"
     >{{label}}</label>
 
-    <input type="text"
-    class=""
+    <input [type]="inputType"
     [ngClass]="withHintClass"
     [value]="_controller.value"
     (input)="onInput($event)"
     (focus)="onFocus()"
     (blur)="onBlur()"
     >
+
+    <ngx-icon-lock *ngIf="type == 'password'" [state]="(isPasswordShown? 'on' :'off')" (click)="togglePassword()"></ngx-icon-lock>
 
     <p class="hint" *ngIf="hint && hint.length>0" [ngClass]="hintClass">this is hint</p>
   </div>

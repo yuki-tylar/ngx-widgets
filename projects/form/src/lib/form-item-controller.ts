@@ -74,6 +74,15 @@ export class FormItemController implements IFormItemController{
     return true;
   }
 
+  setValidatorEmail(o: {email?: string | boolean, message?: string}): boolean{
+    if(o.email === undefined || o.email === false || o.email === 'false'){ return false; }
+
+    if(!o.message || o.message.length == 0){ o.message = 'Invalid email'; }
+    this.validators.set('email', {isValid: false, message: o.message});
+    return true;
+  }
+
+
   setValidatorMin(o: {min?: string | number, message?: string}): boolean{
     const val = Number(o.min);
     if(isNaN(val) || val <= 0){ return false; }
@@ -95,4 +104,5 @@ export class FormItemController implements IFormItemController{
     this.validators.set('max', {isValid: false, message: message, value: val});
     return true;
   }
+
 }

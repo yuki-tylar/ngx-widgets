@@ -2,13 +2,11 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/form",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@takayuki-h/ngx-directive": "directive"
-    }
+    "entryFile": "src/public-api.ts"
   },
   "whitelistedNonPeerDependencies": [
     "tslib",
-    "@takayuki-h/ngx-directive"
+    "@takayuki-h/ngx-directive",
+    "@takayuki-h/ngx-icons"
   ]  
 }
