@@ -1,5 +1,25 @@
-<div class="form-item-textfield">
-  <label>test</label>
-  <input type="text" (keydown)="onInput($event)">
-  <span class="hint">test</span>
+<div 
+class="textfield-container position-relative with-validator"
+>
+  <div class="textfield"
+  [ngClass]="borderClass"
+  >
+    <div class="textfield-bg color-bg"></div>
+    <label
+    [ngClass]="[labelColorClass, labelShrinkClass]"
+    >{{label}}</label>
+
+    <input type="text"
+    class=""
+    [ngClass]="withHintClass"
+    [value]="_controller.value"
+    (input)="onInput($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    >
+
+    <p class="hint" *ngIf="hint && hint.length>0" [ngClass]="hintClass">this is hint</p>
+  </div>
+
+  <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
 </div>

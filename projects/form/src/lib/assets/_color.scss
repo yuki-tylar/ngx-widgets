@@ -62,6 +62,7 @@ $presetColors: (
 }
 
 .color-border-secondary{ border-color: $borderSecondary; }
+.color-text-secondary{ color: $borderSecondary; }
 .color-border-indicator{ border-color: $borderSecondary; }
 
 .dark{
@@ -81,6 +82,7 @@ $presetColors: (
   }
 
   .color-border-secondary{ border-color: $borderSecondaryDark; }
+  .color-text-secondary{ color: $borderSecondaryDark; }
   .color-border-indicator{ border-color: $textPrimaryDark; }
 }
 
@@ -102,6 +104,7 @@ $presetColors: (
     }
 
     .color-border-secondary{ border-color: $borderSecondaryDark; }
+    .color-text-secondary{ color: $borderSecondaryDark; }
     .color-border-indicator{ border-color: $textPrimaryDark; }
   }
 }
