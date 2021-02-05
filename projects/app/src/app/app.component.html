@@ -69,10 +69,13 @@ required
 ></ngx-checkbutton-group>
 
 <button (click)="valInput = 'testtest'">change value to "testtest"</button>
+<button (click)="typeInput = 'text'">change type to "text"</button>
+<button (click)="typeInput = 'password'">change type to "password"</button>
 <div class="form-textfield-group">
   <ngx-textfield 
   [label]="'firstname'" 
   [value]="valInput"
+  [type]="typeInput"
   hint="this is hint"
   required
   min="5"
