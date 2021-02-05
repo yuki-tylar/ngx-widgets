@@ -104,7 +104,7 @@ export class TextfieldComponent implements OnInit {
 
   togglePassword(){ this.isPasswordShown = !this.isPasswordShown; }
 
-  onInput(e: InputEvent){
+  onInput(e: Event){
     if(this.timer){ clearTimeout(this.timer); }
     this._controller.setValue((e.target as HTMLInputElement).value);
 

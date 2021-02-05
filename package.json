@@ -19,8 +19,9 @@
     "@angular/platform-browser": "~11.0.3",
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
-    "@takayuki-h/ngx-directive": "0.0.3",
-    "@takayuki-h/ngx-icons": "0.0.1",
+    "@takayuki-h/ngx-directive": "latest",
+    "@takayuki-h/ngx-icons": "latest",
+    "@takayuki-h/ngx-ui": "latest",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
