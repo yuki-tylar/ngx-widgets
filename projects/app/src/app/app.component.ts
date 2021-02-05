@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   public valInput = '';
-  public typeInput = 'password';
+  public typeInput = 'text';
   onChangeValue(e: any){
     this.valInput = e.value;
   }
