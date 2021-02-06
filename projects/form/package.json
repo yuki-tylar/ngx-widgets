@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@takayuki-h/ngx-directive": "latest",
-    "@takayuki-h/ngx-icons": "latest",
     "@takayuki-h/ngx-ui": "latest",
     "tslib": "^2.0.0"
   }

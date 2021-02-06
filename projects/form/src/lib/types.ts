@@ -1,5 +1,6 @@
 export type FormValidationName = 'required' | 'email' | 'min' | 'max';
 export type ColorPreset = 'blue' | 'green' | 'orange' | 'grey-dark' | 'yellow' | 'default' | 'custom';
+export type DarkMode = 'disable' | 'auto' | 'enable';
 
 export type ChangeCheckboxEvent = {
   value: boolean;

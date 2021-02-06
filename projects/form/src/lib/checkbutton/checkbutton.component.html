@@ -1,7 +1,19 @@
 <div class="checkbutton-container position-relative"
 [ngClass]="[darkClass, withValidatorClass]"
 >
-  <button type="button"
+
+  <ngx-button
+  type="button"
+  appearance="default"
+  [label]="label"
+  round="pill"
+  [color]="color"
+  [darkmode]="darkmode"
+  [state]="_controller.value ? 'on' : 'off'"
+  (click)="onChange($event)"
+  ></ngx-button>
+
+  <!-- <button type="button"
   class="checkbutton cursor-pointer color-border active animate" 
   [ngClass]="color"
   (click)="onChange($event)"
@@ -9,6 +21,6 @@
     <div class="checkbutton-bg color-bg" [ngClass]="color"></div>
     <div class="checkbutton-bg ripple color-bg active" [ngClass]="color"></div>
     <span class="position-relative color-text accent animate" [ngClass]="colorLabelClass">{{_label}}</span>
-  </button>
+  </button> -->
   <p class="error" *ngIf="_controller.isDirty && !_controller.isValid">{{_controller.errorMessage}}</p>  
 </div>

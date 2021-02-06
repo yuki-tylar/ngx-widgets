@@ -12,11 +12,11 @@ export class CheckbuttonComponent implements OnInit {
 
   @Input() id?: string | number;
 
-  @Input() label?: string;
+  @Input() label: string = 'Please check me!';
   @Input() checked?: boolean | string;
 
-  @Input() color: ColorPreset = 'default';
   @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
+  @Input() color: ColorPreset = 'default';
 
   @Input() required?: string | boolean;
   @Input() requiredError?: string;
@@ -24,7 +24,6 @@ export class CheckbuttonComponent implements OnInit {
   @Output() changeValue = new EventEmitter<ChangeCheckboxEvent>();
   @Output() getController = new EventEmitter<any>();
 
-  public _label: string = 'Please check me!';
   public _controller: CheckboxController = new CheckboxController();
   private player?: AnimationPlayer;
   private host: HTMLElement;
@@ -53,7 +52,6 @@ export class CheckbuttonComponent implements OnInit {
 
   ngOnInit(): void {
     this._controller.setId(this.id);
-    if(this.label){ this._label = this.label; }
 
     if(this.checked === undefined || this.checked === false || this.checked === 'false'){ this._controller.uncheck(false); }
     else{ this._controller.check(false); }
@@ -65,13 +63,13 @@ export class CheckbuttonComponent implements OnInit {
 
 
   onChange(e: MouseEvent){
-    const target = this.host.querySelector('.checkbutton') as HTMLElement;
     const isChecked = this._controller.value;
-    this.setupAnimation(e.x, e.y, target.getBoundingClientRect(), (isChecked? 'close' : 'open'));
-
     if(!isChecked){ this._controller.check(); }
     else{ this._controller.uncheck(); }
-    if(this.player){ this.player.play()}
+
+    // const target = this.host.querySelector('.checkbutton') as HTMLElement;
+    // this.setupAnimation(e.x, e.y, target.getBoundingClientRect(), (isChecked? 'close' : 'open'));
+    // if(this.player){ this.player.play()}
 
     this.changeValue.emit({id: this._controller.id, value: this._controller.value});
   }

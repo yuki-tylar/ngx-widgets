@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, SimpleChanges } from '@angular/core';
+import { ColorPreset, DarkMode } from '../types';
 import{ TextfieldController } from '../textfield-controller'; 
 
 
@@ -14,6 +15,8 @@ export class TextfieldComponent implements OnInit {
   @Input() value?: string = '';
   @Input() hint?: string;
   @Input() type: string = 'text';
+  @Input() darkmode: DarkMode = 'disable';
+  @Input() color: ColorPreset = 'default';
 
   @Input() required?: string | boolean;
   @Input() min?: string | number;

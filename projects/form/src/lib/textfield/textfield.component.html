@@ -18,11 +18,15 @@ class="textfield-container position-relative with-validator"
     >
 
     <ngx-button
+    *ngIf="type == 'password'" 
     class="button-lock"
     icon="lock"
-    *ngIf="type == 'password'" 
+    appearance="flat"
+    [darkmode]="darkmode"
+    [color]="color"
     [state]="(isPasswordShown? 'on' :'off')" 
-    (click)="togglePassword()"></ngx-button>
+    (click)="togglePassword()"
+    ></ngx-button>
 
     <p class="hint" *ngIf="hint && hint.length>0" [ngClass]="hintClass">this is hint</p>
   </div>
