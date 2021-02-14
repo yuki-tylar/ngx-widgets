@@ -1,0 +1,18 @@
+
+.file-button-container{
+  display: inline-block;
+  position: relative;
+}
+
+input[type="file"]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+ngx-file-droparea{
+  margin-top: 1em;
+}

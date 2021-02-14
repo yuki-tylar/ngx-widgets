@@ -1,0 +1,11 @@
+<div class="file-button-container">
+  <input type="file"
+  (change)="onChange($event)"
+  [multiple]="isMultiple"
+  >
+  <ngx-button
+  [label]="'click to upload'"
+  (click)="onClick()"
+  stateChangeStyle="stateless"
+  ></ngx-button>
+</div>
