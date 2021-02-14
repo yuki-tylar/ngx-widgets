@@ -12,10 +12,10 @@ export class TextfieldComponent implements OnInit {
 
   @Input() id?: string | number;
   @Input() label: string = 'label';
-  @Input() value?: string = '';
+  @Input() value: string = '';
   @Input() hint?: string;
   @Input() type: string = 'text';
-  @Input() darkmode: DarkMode = 'disable';
+  @Input() darkmode: string = 'disable';
   @Input() color: ColorPreset = 'default';
 
   @Input() required?: string | boolean;
@@ -40,11 +40,12 @@ export class TextfieldComponent implements OnInit {
   constructor() {}
 
   get inputType(){ return (this.type == 'password' && !!this.isPasswordShown)? 'text' : this.type; }
+  get darkClass(){ return (this.darkmode == 'enable')? 'dark' : (this.darkmode=="auto")? 'dark-auto' : ''; }
   get borderClass(){ return this.isFocus? 'color-border active' : 'color-border-secondary'; }
   get withHintClass(){ return (this.hint && this.hint.length > 0)? 'with-hint' : ''; }
-  get labelColorClass(){ return this.isFocus? 'color-text accent' : 'color-text-secondary'}
+  get labelColorClass(){ return this.isFocus ? 'color-text accent' : 'color-text-secondary'}
   get labelShrinkClass(){ return ((this._controller.value && this._controller.value.length > 0) || this.isFocus)? 'shrink' : '' }
-  get hintClass(){ return (this.isFocus)? 'color-text-secondary' : 'color-text'; }
+  get hintClass(){ return (this.isFocus || (this._controller.value && this._controller.value.length > 0))? 'color-text-secondary' : 'color-text'; }
 
   ngOnChanges(e: SimpleChanges){
     if(e.id && !e.id.firstChange){ this._controller.setId(this.id); }

@@ -1,12 +1,13 @@
 <div 
 class="textfield-container position-relative with-validator"
+[ngClass]="darkClass"
 >
   <div class="textfield"
   [ngClass]="borderClass"
   >
     <div class="textfield-bg color-bg"></div>
     <label
-    [ngClass]="[labelColorClass, labelShrinkClass]"
+    [ngClass]="[labelColorClass, labelShrinkClass, color]"
     >{{label}}</label>
 
     <input [type]="inputType"
@@ -24,6 +25,7 @@ class="textfield-container position-relative with-validator"
     appearance="flat"
     [darkmode]="darkmode"
     [color]="color"
+    stateChangeStyle="iconOnly"
     [state]="(isPasswordShown? 'on' :'off')" 
     (click)="togglePassword()"
     ></ngx-button>
