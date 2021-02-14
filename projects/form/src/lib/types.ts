@@ -19,6 +19,37 @@ export type ChangeSelectMultiEvent = {
   selected: IOption[];
 }
 
+export class ChangeFilesEvent {
+  get file(): File | null { return (this.files.length > 0) ? this.files[0] : null; };
+  public files: File[] = [];
+  public filesNotAccepted: {file: File, errorcode: string, message: string}[] = [];
+
+  constructor(
+    files: File[] = [], 
+    filesNotAccepted: File[] = [],
+    isMultiple: boolean = true
+  ){
+    if(isMultiple){ this.files = files; }
+    else if(files.length > 1){
+      for(let i=1; i<files.length; i++){
+        this.filesNotAccepted.push({
+          file: files[i],
+          errorcode: 'e-ngx-file-0',
+          message: 'only 1 file acceptable'
+        });
+      }
+    }
+    
+    filesNotAccepted.forEach(f=>{
+      this.filesNotAccepted.push({
+        file: f,
+        errorcode: 'e-ngx-file-1',
+        message: 'this file type is not acceptable'
+      })
+    })
+  }
+}
+
 
 export type IOption = { id: string | number, label: string, isSelected?: boolean, isRequired?: boolean }
 export class Option {

@@ -10,6 +10,9 @@ import { TextfieldComponent } from './textfield/textfield.component';
 import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
 import { CheckbuttonComponent } from './checkbutton/checkbutton.component';
 import { CheckbuttonGroupComponent } from './checkbutton-group/checkbutton-group.component';
+import { FileButtonComponent } from './file-button/file-button.component';
+import { FileDropareaComponent } from './file-droparea/file-droparea.component';
+import { FilelistComponent } from './filelist/filelist.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,7 @@ import { CheckbuttonGroupComponent } from './checkbutton-group/checkbutton-group
     SelectboxComponent, 
     TextfieldComponent, 
     CheckboxGroupComponent, 
-    CheckbuttonComponent, CheckbuttonGroupComponent,
+    CheckbuttonComponent, CheckbuttonGroupComponent, FileButtonComponent, FileDropareaComponent, FilelistComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,10 @@ import { CheckbuttonGroupComponent } from './checkbutton-group/checkbutton-group
     TextfieldComponent,
     CheckboxGroupComponent,
     CheckbuttonComponent,
-    CheckbuttonGroupComponent
+    CheckbuttonGroupComponent,
+    FileButtonComponent,
+    FileDropareaComponent,
+    FilelistComponent
   ]
 })
 export class FormModule { }
