@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangeSelectEvent , ChangeCheckboxEvent, ChangeSelectMultiEvent} from 'form';
+import { ChangeSelectEvent , ChangeCheckboxEvent, ChangeSelectMultiEvent, ChangeFilesEvent} from 'form';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,20 @@ export class AppComponent implements OnInit {
 
   public colorset = ['blue', 'green', 'orange', 'yellow', 'grey-dark', 'default'];
   public color: string = 'default';
+
+  public darkmode = 'disable';
+  public darkmodes = ['disable', 'auto', 'enable'];
+  changeDarkmode(d: string){ this.darkmode = d; }
+  get darkClass(){
+    let c = '';
+    switch(this.darkmode){
+      case 'disable': c = ''; break;
+      case 'auto': c = 'dark-auto'; break;
+      case 'enable': c = 'dark'; break;
+    }
+    return c;
+  }
+
 
   public statesetCheckbox = ['check', 'uncheck'];
   public checked = false;
@@ -43,6 +57,12 @@ export class AppComponent implements OnInit {
 
   onChangeCheckboxGroup(e: ChangeSelectMultiEvent){
     console.log(e);
+  }
+
+  public changeFileEvent?: ChangeFilesEvent;
+  onChangeFiles(e: ChangeFilesEvent){
+    console.log(e);
+    this.changeFileEvent = e;
   }
 
   public valInput = '';

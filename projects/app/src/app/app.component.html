@@ -1,85 +1,126 @@
-<div style="margin-bottom: 20px;">
-  <button *ngFor="let c of colorset;" (click)="setColor(c)">{{c | titlecase}}</button>
-</div>
+<div class="mainview" [ngClass]="darkClass">
+  <h1>NgxWidgetsForm</h1>
+  <div class="buttons">
+    COLOR: 
+    <button *ngFor="let c of colorset;" (click)="setColor(c)">{{c | titlecase}}</button>
+  </div>
+  <div class="buttons">
+    DARKMODE: 
+    <button *ngFor="let d of darkmodes;" (click)="changeDarkmode(d)">{{d | titlecase}}</button>
+  </div>
 
-<div>
-  <button (click)="selectController.deselect()">Deselect</button>
-  <button *ngFor="let o of optionsSelect; let i = index;" (click)="selectController.select(i)">Select {{o.label}}</button>
-  <button (click)="selectController.clean()">Clean</button>
-</div>
-<div>
-  <ngx-selectbox 
-  [color]="color" 
-  required
-  [options]="optionsSelect" 
-  [selected]="selected" 
-  (changeValue)="onChangeSelect($event)"
-  (getController)="subscribeValidate($event)"
-  ></ngx-selectbox>
-</div>
+  <div>
+    <h2>File Input</h2>
+    <div style="margin-bottom: 10px;">
+      <ngx-file-button style="margin-bottom: 10px;" (change)="onChangeFiles($event)"></ngx-file-button>
+    </div>
+    
+    <ngx-filelist [data]="changeFileEvent"  (change)="onChangeFiles($event)"></ngx-filelist>
+    <ngx-file-droparea (change)="onChangeFiles($event)"></ngx-file-droparea>
+  </div>
+  
 
+  <div>
+    <h2>Selectbox</h2>
+    <div class="buttons">
+      <button (click)="selectController.deselect()">Deselect</button>
+      <button *ngFor="let o of optionsSelect; let i = index;" (click)="selectController.select(i)">Select {{o.label}}</button>
+      <button (click)="selectController.clean()">Clean</button>
+    </div>
+    <ngx-selectbox 
+    [color]="color"
+    [darkmode]="darkmode" 
+    required
+    [options]="optionsSelect" 
+    [selected]="selected" 
+    (changeValue)="onChangeSelect($event)"
+    (getController)="subscribeValidate($event)"
+    ></ngx-selectbox>
+  </div>
+  
+  <div>
+    <h2>Checkbox</h2>
+    <div class="buttons">
+      <button *ngFor="let s of statesetCheckbox" (click)="setStateCheckbox(s)">{{s | titlecase}}</button>
+    </div>
+    <div class="form-checkbox-group">
+      <ngx-checkbox 
+      [color]='color' 
+      [darkmode]="darkmode" 
+      [checked]="checked" 
+      required
+      [label]="'test1'" 
+      (changeValue)="onChange($event)"
+      ></ngx-checkbox>
+    </div>
+  </div>
+  
+  <div>
+    <h2>Checkbox group</h2>
+    <div class="buttons">
+      <button (click)="checkboxGroupController.deselectAll()">Deselect All</button>
+      <button *ngFor="let o of optionsSelect; let i = index;" (click)="checkboxGroupController.toggle(i)">Toggle {{o.label}}</button>
+      <button (click)="checkboxGroupController.selectAll()">Select All</button>
+      <button (click)="checkboxGroupController.clean()">Clean</button>
+    </div>
+    <ngx-checkbox-group
+    [options]="optionsSelect"
+    [darkmode]="darkmode" 
+    [color]="color"
+    required
+    [min]="2"
+    [max]="'2'"
+    (changeValue)="onChangeCheckboxGroup($event)"
+    (getController)="getCheckboxGroupController($event)"
+    ></ngx-checkbox-group>  
+  </div>
 
+  <div>
+    <h2>Checkbutton</h2>
+    <ngx-checkbutton
+    [darkmode]="darkmode" 
+    [color]="color"
+    [label]="'test222'"
+    required
+    ></ngx-checkbutton>
+  </div>
+  
+  <div>
+    <h2>Checkbutton group</h2>
+    <ngx-checkbutton-group
+    [darkmode]="darkmode" 
+    [color]="color"
+    [options]="optionsSelect"
+    required
+    [min]="2"
+    [max]="'2'"
+    (changeValue)="onChangeCheckboxGroup($event)"
+    (getController)="getCheckboxGroupController($event)"
+    ></ngx-checkbutton-group>
+  </div>
+  
+  <div>
+    <h2>Textfield</h2>
+    <div class="buttons">
+      <button (click)="valInput = 'testtest'">change value to "testtest"</button>
+      <button (click)="typeInput = 'text'">change type to "text"</button>
+      <button (click)="typeInput = 'password'">change type to "password"</button>    
+    </div>
 
-<div>
-  <button *ngFor="let s of statesetCheckbox" (click)="setStateCheckbox(s)">{{s | titlecase}}</button>
-</div>
+    <div class="form-textfield-group">
+      <ngx-textfield 
+      [darkmode]="darkmode" 
+      [color]="color"
+      [label]="'firstname'" 
+      [value]="valInput"
+      [type]="typeInput"
+      hint="this is hint"
+      required
+      min="5"
+      max="20"
+      (changeValue)="onChangeValue($event)"
+      ></ngx-textfield>
+    </div>
+  </div>
 
-<div class="form-checkbox-group">
-  <ngx-checkbox 
-  [checked]="checked" 
-  [color]='color' 
-  required
-  [label]="'test1'" 
-  (changeValue)="onChange($event)"
-  ></ngx-checkbox>
-</div>
-
-<div>
-  <button (click)="checkboxGroupController.deselectAll()">Deselect All</button>
-  <button *ngFor="let o of optionsSelect; let i = index;" (click)="checkboxGroupController.toggle(i)">Toggle {{o.label}}</button>
-  <button (click)="checkboxGroupController.selectAll()">Select All</button>
-  <button (click)="checkboxGroupController.clean()">Clean</button>
-</div>
-<ngx-checkbox-group
-[options]="optionsSelect"
-[color]="color"
-required
-[min]="2"
-[max]="'2'"
-(changeValue)="onChangeCheckboxGroup($event)"
-(getController)="getCheckboxGroupController($event)"
-></ngx-checkbox-group>
-
-
-<ngx-checkbutton
-[label]="'test222'"
-required
-[color]="color"
-></ngx-checkbutton>
-
-
-<ngx-checkbutton-group
-[options]="optionsSelect"
-[color]="color"
-required
-[min]="2"
-[max]="'2'"
-(changeValue)="onChangeCheckboxGroup($event)"
-(getController)="getCheckboxGroupController($event)"
-></ngx-checkbutton-group>
-
-<button (click)="valInput = 'testtest'">change value to "testtest"</button>
-<button (click)="typeInput = 'text'">change type to "text"</button>
-<button (click)="typeInput = 'password'">change type to "password"</button>
-<div class="form-textfield-group">
-  <ngx-textfield 
-  [label]="'firstname'" 
-  [value]="valInput"
-  [type]="typeInput"
-  hint="this is hint"
-  required
-  min="5"
-  max="20"
-  (changeValue)="onChangeValue($event)"
-  ></ngx-textfield>
 </div>

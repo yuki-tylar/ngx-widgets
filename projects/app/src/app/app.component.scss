@@ -1,3 +1,22 @@
+.mainview{
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 50px;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  ngx-button{
+    margin-bottom: 20px;
+    &:not(:last-child){ margin-right: 10px;}
+  }
+}
+
 .form-checkbox-group{
   display: flex;
   flex-wrap: wrap;
