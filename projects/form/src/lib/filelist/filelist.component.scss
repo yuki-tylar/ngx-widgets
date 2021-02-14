@@ -1,0 +1,57 @@
+:host{
+  font-size: 14px;
+  line-height: 1em;
+}
+
+ul.ngx-files{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+
+  &:not(:last-child){
+    margin: 0 0 1em;
+  }
+
+  
+  li{
+    display: inline-flex;
+    align-items: center;
+    border: solid 1px;
+    border-radius: 5em;
+    padding: 0.1em 1.3em;
+
+    margin: 0 1em 0.5em 0;
+
+    &.not-accepted{
+      position: relative;
+      border: none;
+      color: var(--ngx-item-secondary, grey);
+      padding: 0 0.3em;
+      &::before{
+        content: '';
+        width: 100%;
+        height: 1px;
+        background: var(--ngx-item-secondary, grey);
+        position: absolute;
+        top: calc(50% - 0.5px);
+        left: 0;
+      }
+    }
+  }
+}
+
+.ngx-file-icon{ 
+  width: 1.3em; 
+  height: 1.3em; 
+}
+.ngx-file-label{ 
+  padding-left: 0.3em;
+  padding-right: 0.5em;
+ }
+
+ ngx-button{
+   font-size: 1em;
+ }

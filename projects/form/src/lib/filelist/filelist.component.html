@@ -1,0 +1,25 @@
+<ul class="ngx-files" *ngIf="data && data.files && data.files.length > 0">
+  <li *ngFor="let f of data.files; let i = index;">
+    <img class="ngx-file-icon" src="https://s2.svgbox.net/octicons.svg?ic=image&color=000">
+    <span class="ngx-file-label">{{f.name}}</span>
+    <ngx-button 
+    icon="lock" 
+    appearance="flat"
+    padding="none"
+    stateChangeStyle="stateless"
+    (click)="removeFile(i)"
+    ></ngx-button>
+  </li>
+</ul>
+
+<ul class="ngx-files" *ngIf="data && data.filesNotAccepted && data.filesNotAccepted.length > 0">
+  <li *ngFor="let d of data.filesNotAccepted; let i = index;" class="not-accepted">
+    <ngx-button 
+    [label]="d.file.name" 
+    appearance="flat"
+    padding="none-x"
+    stateChangeStyle="stateless"
+    (click)="removeFileNotAccepted(i)"
+    ></ngx-button>
+  </li>
+</ul>
