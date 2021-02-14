@@ -3,29 +3,45 @@
 
 :root{
 
-  --ngx-form-accent: #3375C3;
-  --ngx-form-accent-font: white;
-  --ngx-form-primary: white;
-   --ngx-form-primary-font: black;
-  --ngx-form-secondary: grey;
+  --ngx-item-primary: white;
+  --ngx-item-on-primary: inherit; 
 
-  --ngx-form-accent-dark: yellow;
-  --ngx-form-accent-font-dark: black;
-  --ngx-form-primary-dark: black;
-  --ngx-form-primary-font-dark: white;  
-  --ngx-form-secondary-dark: black;
+  --ngx-item-primary-dark: black;
+  --ngx-item-on-primary-dark: inherit;
+
+  --ngx-item-accent: #3375C3;
+  --ngx-item-on-accent: white;
+
+  --ngx-item-accent-dark: yellow;
+  --ngx-item-on-accent-dark: black;
+
+  --ngx-form-secondary: grey;
+  --ngx-form-secondary-dark: grey;
 
 }
 
 body{
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
 
   color: black;
   background: white;
-  // @media (prefers-color-scheme: dark){
-  //   color: white;
-  //   background: black;
-  // }
 
+  .dark{
+    color: white;
+    background: black;
+  }
+  .dark-auto{
+    @media (prefers-color-scheme: dark){
+      color: white;
+      background: black;
+    }  
+  }
+}
+
+
+ngx-button button{
+  outline: none;
 }

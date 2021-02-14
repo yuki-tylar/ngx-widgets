@@ -4,22 +4,22 @@ $orange: var(--orange, #EF6C00);
 $yellow: var(--yellow, #FFF176);
 $greyDark: var(--grey-dark, #212121);
 
-$bgPrimary: var(--ngx-form-primary, white);
-$textPrimary: var(--ngx-form-primary-font, inherit);
+$bgPrimary: var(--ngx-item-primary, white);
+$textPrimary: var(--ngx-item-on-primary, inherit);
 $borderPrimary: $textPrimary;
 
-$bgAccent: var(--ngx-form-accent, #3D5AFE);
-$textAccent: var(--ngx-form-accent-font, white);
+$bgAccent: var(--ngx-item-accent, #3D5AFE);
+$textAccent: var(--ngx-item-on-accent, white);
 $borderAccent: $bgAccent;
 
 $borderSecondary: var(--ngx-form-secondary, #A6A6A6);
 
-$bgPrimaryDark: var(--ngx-form-primary-dark, #272727);
-$textPrimaryDark: var(--ngx-form-primary-font-dark, white);
+$bgPrimaryDark: var(--ngx-item-primary-dark, #272727);
+$textPrimaryDark: var(--ngx-item-on-primary-dark, white);
 $borderPrimaryDark: $textPrimaryDark;
 
-$bgAccentDark: var(--ngx-form-accent-dark, #FFF176);
-$textAccentDark: var(--ngx-form-accent-font-dark, black);
+$bgAccentDark: var(--ngx-item-accent-dark, #FFF176);
+$textAccentDark: var(--ngx-item-on-accent-dark, black);
 $borderAccentDark: $bgAccentDark;
 
 $borderSecondaryDark: var(--ngx-form-secondary-dark, black);
@@ -71,8 +71,9 @@ $presetColors: (
     &.active{ background: $bgAccentDark; }  
   }
 
-  &.color-text{
+  .color-text{
     color: $textPrimaryDark;
+    &.accent{ color: $bgAccentDark; }
     &.active{ color: $textAccentDark; } 
   }
 
@@ -95,6 +96,7 @@ $presetColors: (
 
     .color-text{
       color: $textPrimaryDark;
+      &.accent{ color: $bgAccentDark; }
       &.active{ color: $textAccentDark; } 
     }
 
