@@ -1,0 +1,8 @@
+<div 
+*ngIf="isDragOn" 
+class="ngx-droparea" 
+(drop)="onDrop($event)"
+(click)="hide()"
+(mousemove)="hide()"
+[@fade]
+></div>
