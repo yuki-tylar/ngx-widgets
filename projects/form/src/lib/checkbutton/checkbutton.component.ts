@@ -15,7 +15,7 @@ export class CheckbuttonComponent implements OnInit {
   @Input() label: string = 'Please check me!';
   @Input() checked?: boolean | string;
 
-  @Input() darkmode: 'disable' | 'auto' | 'enable' = 'disable';
+  @Input() darkmode: string = 'disable';
   @Input() color: ColorPreset = 'default';
 
   @Input() required?: string | boolean;
